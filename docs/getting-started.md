@@ -11,7 +11,7 @@
 ## 安装
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/ScholarWriting.git
+git clone https://github.com/pkgunboat/ScholarWriting.git
 cd ScholarWriting
 pip install -r scholar-writing/scripts/requirements.txt
 ```
