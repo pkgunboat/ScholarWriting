@@ -1,0 +1,49 @@
+# 可行性分析章节评审清单
+section: 可行性分析
+target_length: "1-2页"
+reviewers: [R1, R2, R3]
+
+checklist:
+  logic:
+    - id: L1
+      criterion: "可行性论证应从多个维度展开，每个维度的论据应具体有据"
+      weight: high
+
+    - id: L2
+      criterion: "每项可行性依据应与研究方案中的具体环节建立关联"
+      weight: high
+
+    - id: L3
+      criterion: "风险分析应针对方案中的关键技术难点，而非泛泛的通用风险"
+      weight: medium
+
+  de_ai:
+    - id: D1
+      criterion: "避免自夸式表述，用客观事实和数据替代主观评价"
+      weight: medium
+      few_shot: "好：团队已在AAAI 2025发表GUI Agent相关论文2篇，积累了XX数据集的构建经验。差：团队能力突出，完全有能力完成本项目。"
+
+    - id: D2
+      criterion: "避免使用'能力突出''经验丰富''实力雄厚'等空泛修饰语"
+      weight: high
+
+    - id: D3
+      criterion: "每项可行性论据应包含具体的量化信息或事实依据"
+      weight: high
+
+  completeness:
+    - id: C1
+      criterion: "应覆盖理论基础、技术条件、团队能力、平台支撑四个维度"
+      weight: high
+
+    - id: C2
+      criterion: "应包含针对关键技术风险的预案或替代方案"
+      weight: medium
+
+    - id: C3
+      criterion: "团队介绍应包含与项目直接相关的研究经历和成果"
+      weight: high
+
+    - id: C4
+      criterion: "平台条件应具体说明可用的计算资源、数据资源等"
+      weight: medium

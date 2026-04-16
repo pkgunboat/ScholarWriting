@@ -1,0 +1,49 @@
+# 创新点章节评审清单
+section: 创新点
+target_length: "0.5-1页"
+reviewers: [R1, R2, R3]
+
+checklist:
+  logic:
+    - id: L1
+      criterion: "每个创新点应包含可验证的差异性描述，说明与现有工作的具体区别"
+      weight: critical
+
+    - id: L2
+      criterion: "创新点应与研究内容条目有明确的对应关系"
+      weight: high
+
+    - id: L3
+      criterion: "创新点之间应体现不同层面的贡献，避免重复或过度重叠"
+      weight: medium
+
+  de_ai:
+    - id: D1
+      criterion: "避免使用'一定程度上''较为显著'等模糊限定表达"
+      weight: high
+
+    - id: D2
+      criterion: "每个创新点应有与之对比的现有方法或基准，避免无参照的自我宣称"
+      weight: medium
+      few_shot: "好：区别于现有基于坐标回归的定位方法，本项目首次将视觉定位问题转化为语义匹配问题。差：本项目提出了一种创新性的方法，具有重要的理论价值。"
+
+    - id: D3
+      criterion: "避免使用'首次提出''开创性'等表述，除非有充分的文献调研支撑"
+      weight: medium
+
+  completeness:
+    - id: C1
+      criterion: "应包含3个层次分明的创新点"
+      weight: high
+
+    - id: C2
+      criterion: "每个创新点应遵循'首次/创新性 + 做什么 + 与现有方法的区别'的结构"
+      weight: high
+
+    - id: C3
+      criterion: "创新点应覆盖方法创新、技术创新、应用创新等不同层面"
+      weight: medium
+
+    - id: C4
+      criterion: "每个创新点的表述应简洁有力，控制在2-3句话以内"
+      weight: medium

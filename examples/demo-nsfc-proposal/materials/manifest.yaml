@@ -1,0 +1,18 @@
+# 素材清单 - 示例
+# 实际使用时，将你的研究材料放入 materials/ 目录，并在此文件中登记
+
+materials:
+  - file: "前期成果_多模态感知综述.md"
+    type: paper
+    description: "申请人发表的多模态感知领域综述论文"
+    relevance: [立项依据, 研究基础]
+
+  - file: "实验结果_交互系统评测.md"
+    type: experiment
+    description: "前期实验中交互系统的用户评测数据"
+    relevance: [研究基础, 可行性分析]
+
+  - file: "研究构想_技术路线草稿.md"
+    type: note
+    description: "申请人对技术路线的初步构想"
+    relevance: [研究内容, 研究方案]

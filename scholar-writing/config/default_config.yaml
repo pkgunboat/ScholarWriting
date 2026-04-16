@@ -1,0 +1,35 @@
+# Scholar Writing Skill 默认配置
+project:
+  type: nsfc
+  template: 面上项目
+  input_mode: from_materials  # from_materials | from_outline | from_draft
+  language: zh
+
+convergence:
+  section_score_threshold: 80       # 章节内环通过分
+  global_score_threshold: 85        # 外环通过分
+  max_major_issues: 2               # 外环收敛条件 B 的最大 major 数
+  max_section_rounds: 3             # 章节内环最大轮次
+  max_global_rounds: 5              # 外环最大轮次
+  human_intervention_on_timeout: true
+  full_consistency_check_interval: 2  # 每 N 轮外环强制全文一致性检查
+
+score_weights:
+  section:
+    logic: 0.40
+    de_ai: 0.25
+    completeness: 0.35
+  global:
+    consistency: 0.30
+    narrative: 0.35
+    feasibility: 0.20
+    format: 0.15
+
+checklist_weight_map:
+  critical: 3
+  high: 2
+  medium: 1
+
+critical_threshold: 60  # critical 条目低于此分数触发短路规则
+
+dry_run: false

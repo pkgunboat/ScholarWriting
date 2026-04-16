@@ -1,0 +1,71 @@
+# 国自然通用模板
+extends: null
+type: nsfc
+
+sections:
+  - name: 摘要
+    file: 01_摘要.md
+    checklist: checklists/01_摘要.yaml
+    writer: writer/nsfc/摘要
+
+  - name: 立项依据
+    file: 02_立项依据.md
+    checklist: checklists/02_立项依据.yaml
+    writer: writer/nsfc/立项依据
+
+  - name: 研究内容
+    file: 03_研究内容.md
+    checklist: checklists/03_研究内容.yaml
+    writer: writer/nsfc/研究内容
+
+  - name: 研究方案
+    file: 04_研究方案.md
+    checklist: checklists/04_研究方案.yaml
+    writer: writer/nsfc/研究方案
+
+  - name: 可行性分析
+    file: 05_可行性分析.md
+    checklist: checklists/05_可行性分析.yaml
+    writer: writer/nsfc/可行性分析
+
+  - name: 创新点
+    file: 06_创新点.md
+    checklist: checklists/06_创新点.yaml
+    writer: writer/nsfc/创新点
+
+  - name: 研究基础
+    file: 07_研究基础.md
+    checklist: checklists/07_研究基础.yaml
+    writer: writer/nsfc/研究基础
+
+dependency_graph:
+  立项依据:
+    depends_on: []
+    priority: 1
+  研究内容:
+    depends_on: [立项依据]
+    priority: 2
+  研究方案:
+    depends_on: [研究内容]
+    priority: 3
+  可行性分析:
+    depends_on: [研究方案]
+    priority: 4
+  创新点:
+    depends_on: [研究内容, 研究方案]
+    priority: 4
+  研究基础:
+    depends_on: [研究内容]
+    priority: 4
+  摘要:
+    depends_on: [立项依据, 研究内容, 创新点]
+    priority: 5
+
+review_strategy:
+  section_level:
+    always: [R1, R2, R3]
+  global_level:
+    always: [R4, R5, R7]
+    conditional:
+      - reviewer: R6
+        triggered_by: [研究方案, 可行性分析]

@@ -1,0 +1,21 @@
+skill_info:
+  name: reviewer-narrative
+  version: "0.1.0"
+  category: reviewing
+  description: "叙事审阅：全文故事线和说服力"
+
+guardrails:
+  allowed_write_files:
+    - "reviews/global/R5_narrative.md"
+  forbidden_write_files:
+    - "sections/**"
+    - "planning/**"
+  read_only: false
+
+settings:
+  two_step_method: true
+  check_dimensions:
+    - "全文叙事弧线"
+    - "章节间过渡自然度"
+    - "说服力评估"
+    - "风格统一性"

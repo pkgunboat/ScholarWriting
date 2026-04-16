@@ -1,0 +1,41 @@
+skill_info:
+  name: architect
+  version: "0.1.0"
+  category: planning
+  description: "文档架构规划，产出大纲、依赖图、论点注册表和材料映射"
+
+parameters:
+  inputs:
+    - name: materials
+      path: "materials/"
+      required: true
+    - name: config
+      path: "config/default_config.yaml"
+      required: true
+  outputs:
+    - name: outline
+      path: "planning/outline.md"
+    - name: dependency_graph
+      path: "planning/dependency_graph.yaml"
+    - name: claim_registry
+      path: "planning/claim_registry.md"
+    - name: material_mapping
+      path: "planning/material_mapping.md"
+    - name: framework_diagram
+      path: "figures/research_framework.mmd"
+
+guardrails:
+  allowed_write_files:
+    - "planning/**"
+    - "figures/research_framework.mmd"
+  forbidden_write_files:
+    - "sections/**"
+    - "config/**"
+    - "reviews/**"
+  read_only: false
+
+settings:
+  generate_framework_diagram: true
+  diagram_format: mermaid
+  outline_detail_level: detailed
+  require_user_confirmation: true

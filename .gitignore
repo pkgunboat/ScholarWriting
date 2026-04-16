@@ -1,0 +1,40 @@
+# OS files
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+dist/
+build/
+.venv/
+venv/
+*.egg
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Agent state
+.omc/
+.claude/
+
+# Project data (user-generated content)
+projects/
+
+# Sensitive documents
+*.pdf
+*.docx
+
+# Environment
+.env
+.env.*
+
+# Logs
+*.log

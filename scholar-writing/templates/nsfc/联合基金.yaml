@@ -1,0 +1,221 @@
+# 联合基金-重点支持项目模板
+# 基于 NSFC 2026 版报告正文提纲
+extends: null
+type: nsfc
+name: 联合基金
+
+sections:
+  # === （一）立项依据与研究内容 ===
+
+  - name: 指南方向
+    file: 01_指南方向.md
+    checklist: null                   # 用户手动填写，不需要 checklist
+    writer: null                      # 不自动生成，用户直接提供
+    manual: true                      # 标记为手动填写章节
+
+  - name: 立项依据
+    file: 02_立项依据.md
+    checklist: checklists/02_立项依据.yaml    # 复用面上项目 checklist
+    writer: writer/nsfc/立项依据
+    subsections:
+      - 研究意义
+      - 国内外研究现状
+      - 参考文献
+
+  - name: 研究内容
+    file: 03_研究内容.md
+    checklist: checklists/03_研究内容.yaml
+    writer: writer/nsfc/研究内容
+    subsections:
+      - 研究目标
+      - 研究内容
+      - 拟解决的关键科学问题
+
+  - name: 研究方案
+    file: 04_研究方案.md
+    checklist: checklists/04_研究方案.yaml
+    writer: writer/nsfc/研究方案
+    subsections:
+      - 总体方案
+      - 技术路线
+
+  - name: 可行性分析
+    file: 05_可行性分析.md
+    checklist: checklists/05_可行性分析.yaml
+    writer: writer/nsfc/可行性分析
+    subsections:
+      - 研究方案可行
+      - 研究条件可行
+      - 研究能力可行
+
+  - name: 特色与创新
+    file: 06_特色与创新.md
+    checklist: checklists/06_创新点.yaml      # 复用面上项目"创新点" checklist
+    writer: writer/nsfc/创新点
+
+  - name: 年度计划
+    file: 07_年度计划.md
+    checklist: checklists/联合基金/07_年度计划.yaml    # 需要新建
+    writer: null                                       # 需要新建 Writer，暂不指定
+    subsections:
+      - 年度计划
+      - 预期成果
+
+  # === （二）研究基础与工作条件 ===
+
+  - name: 研究基础
+    file: 08_研究基础.md
+    checklist: checklists/07_研究基础.yaml    # 复用面上项目 checklist
+    writer: writer/nsfc/研究基础
+    subsections:
+      - 科研项目研究基础
+      - 关键技术研究基础
+      - 承担单位合作基础
+
+  - name: 工作条件
+    file: 09_工作条件.md
+    checklist: checklists/联合基金/09_工作条件.yaml    # 需要新建
+    writer: null                                       # 需要新建 Writer
+    manual: true                                       # 多为事实性内容，可手动填写
+
+  - name: 在研项目
+    file: 10_在研项目.md
+    checklist: null
+    writer: null
+    manual: true                      # 事实性列表，用户手动填写
+
+  - name: 完成项目情况
+    file: 11_完成项目情况.md
+    checklist: checklists/联合基金/11_完成项目情况.yaml  # 需要新建
+    writer: null
+    subsections:
+      - 与本申请项目的关系
+      - 上一项目结题总结摘要
+      - 相关成果详细目录
+
+  # === （三）其他说明 ===
+
+  - name: 其他说明
+    file: 12_其他说明.md
+    checklist: null
+    writer: null
+    manual: true
+
+dependency_graph:
+  指南方向:
+    depends_on: []
+    priority: 0                       # 最先确定，用户手动提供
+  立项依据:
+    depends_on: [指南方向]
+    priority: 1
+  研究内容:
+    depends_on: [立项依据]
+    priority: 2
+  研究方案:
+    depends_on: [研究内容]
+    priority: 3
+  可行性分析:
+    depends_on: [研究方案, 研究基础]
+    priority: 4
+  特色与创新:
+    depends_on: [研究内容, 研究方案]
+    priority: 4
+  年度计划:
+    depends_on: [研究内容, 研究方案]
+    priority: 5
+  研究基础:
+    depends_on: [研究内容]
+    priority: 3                       # 与研究方案同级，互相独立
+  工作条件:
+    depends_on: []
+    priority: 3                       # 事实性内容，不依赖其他章节
+  在研项目:
+    depends_on: []
+    priority: 0                       # 事实性列表
+  完成项目情况:
+    depends_on: []
+    priority: 0
+  其他说明:
+    depends_on: []
+    priority: 0
+
+review_strategy:
+  section_level:
+    always: [R1, R2, R3]             # 逻辑 + 去AI化 + 完整性
+    skip_for_manual: true             # manual=true 的章节跳过自动审阅
+  global_level:
+    always: [R4, R5, R7]             # 一致性 + 叙事 + 格式
+    conditional:
+      - reviewer: R6                  # 可行性审阅
+        triggered_by: [研究方案, 可行性分析]
+
+constraints:
+  total_pages: null                   # 联合基金无总页数硬限制，但建议控制
+  # （一）立项依据与研究内容建议 5000-10000 字（不含研究方案部分）
+  part_one_guideline: "5000-10000字"
+
+length_management:
+  enabled: true
+
+  section_targets:
+    指南方向:
+      chars: [100, 300]
+      priority: "固定"
+    立项依据:
+      chars: [8000, 12000]
+      priority: "该厚"               # 核心章节，需要充分论证
+    研究内容:
+      chars: [5000, 8000]
+      priority: "该厚"               # 核心章节
+    研究方案:
+      chars: [18000, 25000]
+      priority: "该厚"               # 联合基金方案通常非常详细
+    可行性分析:
+      chars: [1500, 3000]
+      priority: "适中"
+    特色与创新:
+      chars: [800, 1500]
+      priority: "该瘦"               # 精炼
+    年度计划:
+      chars: [2000, 3500]
+      priority: "适中"
+    研究基础:
+      chars: [6000, 10000]
+      priority: "适中"               # 联合基金需要展示多单位合作基础
+    工作条件:
+      chars: [800, 1500]
+      priority: "该瘦"
+    在研项目:
+      chars: [300, 800]
+      priority: "固定"               # 事实性列表
+    完成项目情况:
+      chars: [2000, 4000]
+      priority: "适中"
+    其他说明:
+      chars: [200, 500]
+      priority: "固定"
+
+  compress:
+    priority:
+      - "删除冗余修饰词和空洞表述"
+      - "合并重复或相近的论述"
+      - "精简过渡段落"
+      - "压缩引文描述（保留核心贡献，删除细节）"
+    max_rounds: 3
+    preserve:
+      - "核心论点和科学问题表述"
+      - "关键数据和量化指标"
+      - "必要引文"
+      - "各课题间的逻辑关联描述"
+
+  expand:
+    priority:
+      - "补充实验细节和技术参数"
+      - "增加文献支撑（特别是近3年文献）"
+      - "深化机制讨论和理论分析"
+      - "添加具体案例或应用场景"
+      - "强化各课题间的协同关系描述"
+    max_rounds: 3
+    avoid:
+      - "注水式扩写"
+      - "添加与核心问题无关的背景信息"

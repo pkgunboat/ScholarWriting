@@ -1,0 +1,28 @@
+# materials/manifest.yaml 的 JSON Schema 定义
+type: object
+required: [materials]
+properties:
+  version:
+    type: string
+    pattern: "^\\d+\\.\\d+$"
+  materials:
+    type: array
+    minItems: 1
+    items:
+      type: object
+      required: [path, type, description]
+      properties:
+        path:
+          type: string
+        type:
+          type: string
+          enum: [paper, note, data, code, other]
+        description:
+          type: string
+          minLength: 5
+        sections:
+          type: array
+          items:
+            type: string
+        key_content:
+          type: string

@@ -1,0 +1,20 @@
+skill_info:
+  name: reviewer-completeness
+  version: "0.1.0"
+  category: reviewing
+  description: "完备性审阅：逐条验证 checklist 要素"
+
+guardrails:
+  allowed_write_files:
+    - "reviews/*/R3_completeness.md"
+  forbidden_write_files:
+    - "sections/**"
+    - "planning/**"
+  read_only: false
+
+settings:
+  two_step_method: true
+  scoring:
+    exists_sufficient: [80, 100]
+    exists_insufficient: [40, 79]
+    missing: [0, 39]

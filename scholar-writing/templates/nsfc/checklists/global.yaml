@@ -1,0 +1,73 @@
+# 全文评审清单
+section: 全文
+target_length: "≤20页"
+reviewers: [R4, R5, R6, R7]
+
+checklist:
+  consistency:
+    - id: CON1
+      criterion: "摘要中的关键词应在正文各章节中有充分展开和呼应"
+      weight: critical
+
+    - id: CON2
+      criterion: "研究内容条目与技术路线中的方案应逐项匹配，无遗漏或错位"
+      weight: critical
+
+    - id: CON3
+      criterion: "创新点应与研究内容条目形成明确的对应关系"
+      weight: high
+
+    - id: CON4
+      criterion: "立项依据中的科学问题应在研究内容和研究方案中得到完整回应"
+      weight: high
+
+    - id: CON5
+      criterion: "全文使用的核心术语应前后统一，避免同义混用"
+      weight: medium
+
+  narrative:
+    - id: NAR1
+      criterion: "全文应能用一句话概括核心贡献：针对什么问题、用什么方法、达到什么效果"
+      weight: critical
+
+    - id: NAR2
+      criterion: "各章节之间的过渡应自然流畅，体现整体论证的连贯性"
+      weight: high
+
+    - id: NAR3
+      criterion: "全文应形成'问题→方法→验证→成果'的因果闭环，无断裂环节"
+      weight: critical
+
+    - id: NAR4
+      criterion: "摘要的叙事线应与正文的展开逻辑保持一致"
+      weight: high
+
+  feasibility:
+    - id: FEA1
+      criterion: "年度计划的时间节点应合理，关键任务应有充足的执行周期"
+      weight: high
+
+    - id: FEA2
+      criterion: "研究基础应覆盖研究方案中至少三分之一的关键技术环节"
+      weight: high
+
+    - id: FEA3
+      criterion: "团队的研究方向和已有成果应与项目主题高度相关"
+      weight: medium
+
+  format:
+    - id: FMT1
+      criterion: "正文总页数应控制在20页以内"
+      weight: critical
+
+    - id: FMT2
+      criterion: "立项依据应占总篇幅的25%-35%，研究方案应占30%-40%"
+      weight: medium
+
+    - id: FMT3
+      criterion: "各级标题层次应清晰统一，编号格式前后一致"
+      weight: medium
+
+    - id: FMT4
+      criterion: "参考文献格式应统一规范，信息完整"
+      weight: medium

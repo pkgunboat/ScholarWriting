@@ -1,0 +1,22 @@
+skill_info:
+  name: reviewer-consistency
+  version: "0.1.0"
+  category: reviewing
+  description: "全文一致性审阅：术语、论点、数据的跨章节一致性"
+
+guardrails:
+  allowed_write_files:
+    - "reviews/global/R4_consistency.md"
+  forbidden_write_files:
+    - "sections/**"
+    - "planning/**"
+  read_only: false
+
+settings:
+  two_step_method: true
+  check_dimensions:
+    - "术语一致性"
+    - "论点一致性（与claim_registry对照）"
+    - "数据一致性"
+    - "编号一致性"
+  forced_interval: 2

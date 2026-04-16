@@ -1,0 +1,49 @@
+# 研究基础章节评审清单
+section: 研究基础
+target_length: "2-3页"
+reviewers: [R1, R2, R3]
+
+checklist:
+  logic:
+    - id: L1
+      criterion: "每项前期成果应明确说明其与研究方案中具体环节的支撑关系"
+      weight: high
+
+    - id: L2
+      criterion: "成果展示应按与项目的相关性排序，最相关的成果优先呈现"
+      weight: medium
+
+    - id: L3
+      criterion: "前期工作与拟开展研究之间应体现自然的延续和递进关系"
+      weight: high
+
+  de_ai:
+    - id: D1
+      criterion: "避免简单罗列成果，每项成果应说明其对本项目的具体支撑作用"
+      weight: high
+      few_shot: "好：团队在[AAAI 2025]提出的GUI元素检测框架已验证了视觉特征提取模块的有效性，为本项目研究内容一提供了技术基础。差：发表SCI论文10篇，EI论文5篇。"
+
+    - id: D2
+      criterion: "避免罗列式堆砌论文和项目编号，应突出与本项目的关联"
+      weight: medium
+
+    - id: D3
+      criterion: "团队成员介绍应聚焦与项目相关的专长，而非全面履历"
+      weight: medium
+
+  completeness:
+    - id: C1
+      criterion: "应覆盖相关论文发表、主持/参与项目、学生培养三个方面"
+      weight: high
+
+    - id: C2
+      criterion: "研究方案中至少三分之一的关键技术环节应有前期工作基础支撑"
+      weight: critical
+
+    - id: C3
+      criterion: "应包含申请人和核心成员的研究经历与项目相关性说明"
+      weight: high
+
+    - id: C4
+      criterion: "前期成果中应有近3年的代表性工作"
+      weight: medium

@@ -1,0 +1,42 @@
+skill_info:
+  name: writer-nsfc-foundation
+  version: "0.1.0"
+  category: writing
+  description: "国自然研究基础章节写作"
+
+parameters:
+  inputs:
+    - name: research_plan
+      path: "sections/03_研究方案.md"
+      required: true
+    - name: claim_registry
+      path: "planning/claim_registry.md"
+      required: true
+  outputs:
+    - name: section
+      path: "sections/06_研究基础.md"
+
+guardrails:
+  allowed_write_files:
+    - "sections/06_研究基础.md"
+  forbidden_write_files:
+    - "sections/01_*.md"
+    - "sections/02_*.md"
+    - "sections/03_*.md"
+    - "planning/**"
+  read_only: false
+
+settings:
+  word_count:
+    range: [3000, 5000]
+  page_target: [2, 3]
+  coverage_threshold: 0.33
+  risk_mitigation:
+    required: true
+    min_risks: 2
+    max_risks: 3
+  evidence_priority:
+    - "直接相关成果"
+    - "方法储备"
+    - "平台条件"
+    - "团队履历"

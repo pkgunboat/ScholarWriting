@@ -1,0 +1,62 @@
+# 立项依据章节评审清单
+section: 立项依据
+target_length: "3-5页"
+reviewers: [R1, R2, R3]
+
+checklist:
+  logic:
+    - id: L1
+      criterion: "论述应遵循宏观→微观的递进结构，从领域背景逐步聚焦到具体科学问题"
+      weight: high
+      few_shot: "好：先综述GUI Agent领域发展，再聚焦多模态理解瓶颈，最后提出视觉定位偏差问题。差：直接列举多个松散相关的技术问题。"
+
+    - id: L2
+      criterion: "科学问题应从研究空白中自然推导得出，有明确的逻辑因果链"
+      weight: critical
+
+    - id: L3
+      criterion: "每个论点应有对应的引文支撑，避免无出处的事实性陈述"
+      weight: high
+
+    - id: L4
+      criterion: "国内外研究现状的分析应体现递进关系，而非简单罗列"
+      weight: high
+
+  de_ai:
+    - id: D1
+      criterion: "避免使用'随着XX的快速发展'等公式化开头"
+      weight: medium
+
+    - id: D2
+      criterion: "避免出现无具体证据支撑的空洞断言"
+      weight: high
+      few_shot: "好：现有方法在复杂GUI界面上的定位准确率仅为63%[12]。差：现有方法存在明显不足，亟需改进。"
+
+    - id: D3
+      criterion: "段落之间的过渡应自然流畅，体现逻辑递进而非生硬拼接"
+      weight: medium
+
+    - id: D4
+      criterion: "避免过度使用'然而''但是'等转折词制造人为对立"
+      weight: medium
+
+  completeness:
+    - id: C1
+      criterion: "国内外研究现状应均有覆盖，体现对领域全貌的把握"
+      weight: high
+
+    - id: C2
+      criterion: "应明确指出至少2个具体的研究空白或未解决问题"
+      weight: critical
+
+    - id: C3
+      criterion: "引用文献应不少于25篇，其中近3年文献占比应达到50%以上"
+      weight: medium
+
+    - id: C4
+      criterion: "应明确凝练1-2个拟解决的科学问题，表述清晰可验证"
+      weight: critical
+
+    - id: C5
+      criterion: "研究空白与科学问题之间应有明确的映射关系"
+      weight: high

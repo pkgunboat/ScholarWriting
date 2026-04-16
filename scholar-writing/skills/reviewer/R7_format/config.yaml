@@ -1,0 +1,39 @@
+skill_info:
+  name: reviewer-format
+  version: "0.1.0"
+  category: reviewing
+  description: "格式审阅：篇幅管理、引文验证、格式规范性"
+
+guardrails:
+  allowed_write_files:
+    - "reviews/global/R7_format.md"
+  forbidden_write_files:
+    - "sections/**"
+    - "planning/**"
+  read_only: false
+
+settings:
+  two_step_method: true
+  scripts:
+    - "scripts/count_words.py"
+    - "scripts/check_format.py"
+    - "scripts/check_references.py"
+    - "scripts/check_cross_refs.py"
+  length_management:
+    enabled: true
+  citation_semantic_check:
+    enabled: true
+    confidence_threshold: medium
+    checks:
+      - id: claim_citation_match
+        description: "引用论点与原文匹配"
+        severity: P0
+      - id: citation_context_accuracy
+        description: "引用上下文准确性"
+        severity: P1
+      - id: self_citation_relevance
+        description: "自引相关性"
+        severity: P2
+      - id: citation_recency
+        description: "引文时效性"
+        severity: P2

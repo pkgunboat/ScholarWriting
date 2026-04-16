@@ -1,0 +1,17 @@
+skill_info:
+  name: reviewer-logic
+  version: "0.1.0"
+  category: reviewing
+  description: "逻辑审阅：检查论证链完整性、推理跳跃"
+
+guardrails:
+  allowed_write_files:
+    - "reviews/*/R1_logic.md"
+  forbidden_write_files:
+    - "sections/**"
+    - "planning/**"
+  read_only: false
+
+settings:
+  two_step_method: true
+  scoring_range: [0, 100]

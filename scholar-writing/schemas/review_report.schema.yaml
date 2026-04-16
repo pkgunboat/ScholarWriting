@@ -1,0 +1,21 @@
+# reviews/ 审阅报告的 frontmatter JSON Schema 定义
+type: object
+required: [section, reviewer, round, dimension]
+properties:
+  section:
+    type: string
+  reviewer:
+    type: string
+    pattern: "^R[1-7]$"
+  round:
+    type: integer
+    minimum: 1
+  dimension:
+    type: string
+    enum: [logic, de_ai, completeness, consistency, narrative, feasibility, format]
+  score:
+    type: number
+    minimum: 0
+    maximum: 100
+  has_critical_flag:
+    type: boolean

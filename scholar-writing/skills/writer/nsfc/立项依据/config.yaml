@@ -1,0 +1,63 @@
+skill_info:
+  name: writer-nsfc-justification
+  version: "0.1.0"
+  category: writing
+  description: "国自然立项依据章节写作"
+
+parameters:
+  inputs:
+    - name: outline
+      path: "planning/outline.md"
+      required: true
+    - name: materials
+      path: "materials/"
+      required: false
+    - name: claim_registry
+      path: "planning/claim_registry.md"
+      required: true
+  outputs:
+    - name: section
+      path: "sections/01_立项依据.md"
+
+guardrails:
+  allowed_write_files:
+    - "sections/01_立项依据.md"
+  forbidden_write_files:
+    - "sections/02_*.md"
+    - "sections/03_*.md"
+    - "planning/**"
+    - "config/**"
+  read_only: false
+
+settings:
+  writing_mode: theoretical
+  structure: funnel_four_section
+  word_count:
+    target: 9000
+    range: [8000, 10000]
+    tolerance: 800
+  page_target: [5, 7]
+  references:
+    min_count: 25
+    recent_3yr_ratio: 0.50
+    self_citation_max_ratio: 0.20
+    require_chinese: true
+  recommended_sections:
+    - "研究背景与科学意义"
+    - "面临的挑战"
+    - "国内外相关工作"
+    - "总结"
+  min_section_count: 3
+  soul_questions_check: true
+  coach:
+    enabled: true
+    stage_inference: auto
+  quality_guards:
+    forbidden_phrases:
+      - "填补国内/国际空白"
+      - "首次发现"
+      - "开创性"
+      - "国际领先"
+    warn_phrases:
+      - "随着...的快速发展"
+      - "在信息化时代"

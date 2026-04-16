@@ -1,0 +1,168 @@
+# R8 专家评审模拟 - 配置文件
+# 作为 pipeline 阶段4（收敛后）触发
+
+skill_info:
+  name: reviewer-expert-simulation
+  version: "0.1.0"
+  category: reviewing
+  description: "模拟3-5位评审专家进行多维度评审，含过会判断和资助额度约束识别"
+
+# 触发条件（由 pipeline 判断）
+trigger:
+  phase: post_convergence          # 在阶段3收敛后触发
+  requires:
+    global_score_min: 85
+    critical_issues: 0
+    major_issues_max: 2
+
+# 评审维度与权重
+dimensions:
+  innovation:
+    name: "创新性"
+    weight: 0.25
+    focus:
+      - "科学问题原创性"
+      - "假说颠覆性"
+      - "是否新瓶装旧酒"
+      - "创新点可验证性"
+  hypothesis:
+    name: "科学假说与问题"
+    weight: 0.20
+    focus:
+      - "假说可检验性"
+      - "问题清晰性"
+      - "目标与问题一致性"
+      - "理论依据充分性"
+  methodology:
+    name: "研究方案与可行性"
+    weight: 0.20
+    focus:
+      - "技术路线清晰性"
+      - "方法先进性"
+      - "关键问题解决方案"
+      - "备选方案"
+  foundation:
+    name: "研究基础"
+    weight: 0.15
+    focus:
+      - "前期工作相关性"
+      - "实验结果支撑度"
+      - "论文质量相关性"
+      - "申请人积累"
+  team:
+    name: "研究团队"
+    weight: 0.10
+    focus:
+      - "申请人经历能力"
+      - "团队背景分工"
+      - "协作能力"
+      - "完成条件"
+  outcomes:
+    name: "预期成果与科学意义"
+    weight: 0.10
+    focus:
+      - "成果明确可量化"
+      - "科学意义"
+      - "应用前景合理性"
+      - "成果与投入匹配"
+
+# 专家画像配置
+expert_profiles:
+  - id: innovation_expert
+    name: "学术前沿与创新性专家"
+    perspective: "关注科学问题的原创性和前沿性"
+    strictness: high
+    enabled: true
+  - id: methodology_expert
+    name: "研究方法与可行性专家"
+    perspective: "关注技术路线的合理性和可操作性"
+    strictness: medium
+    enabled: true
+  - id: critical_reviewer
+    name: "严格综合评审专家"
+    perspective: "从整体角度审视项目的学术价值和竞争力"
+    strictness: very_high
+    enabled: true
+  - id: constructive_reviewer
+    name: "建设性评审专家"
+    perspective: "在指出问题的同时提供具体改进建议"
+    strictness: medium
+    enabled: false                  # 默认不启用，用户可开启
+  - id: domain_expert
+    name: "领域深度与学术判断专家"
+    perspective: "从领域专家角度判断研究价值"
+    strictness: high
+    enabled: false                  # 默认不启用，用户可开启
+
+# 默认使用的专家数量
+default_panel_count: 3              # 默认3位（前3个enabled=true的）
+max_panel_count: 5
+
+# 问题严重程度定义
+severity_levels:
+  P0:
+    label: "致命问题"
+    color: red
+    description: "直接导致不予资助"
+  P1:
+    label: "重要问题"
+    color: orange
+    description: "显著降低竞争力"
+  P2:
+    label: "建议改进"
+    color: yellow
+    description: "锦上添花"
+
+# 过会判断配置
+verdict:
+  letter_review:
+    pass_label: "建议资助"
+    fail_label: "不建议资助"
+  panel_review:
+    pass_label: "优先资助"
+    fail_label: "不予资助"
+    stricter_than_letter: true
+  confidence_levels:
+    - "高"
+    - "中"
+    - "低"
+  require_binary_verdict: true       # 必须给出二值判断
+
+# 资助额度约束识别
+funding_context:
+  enabled: true
+  distinguish_design_vs_budget: true  # 区分设计缺陷与预算限制妥协
+  profiles:
+    youth:
+      name: "青年基金"
+      budget_range: "30-40万"
+      expectation: "单一主问题 + 最小可行验证闭环"
+    general:
+      name: "面上项目"
+      budget_range: "50-60万"
+      expectation: "较完整研究链条"
+    key:
+      name: "重点项目"
+      budget_range: "200-300万"
+      expectation: "系统性解决方案 + 完整技术体系"
+
+# 聚合策略
+aggregation:
+  consensus_threshold: 0.60          # 60%以上专家一致视为共识
+  keep_individual_reviews: true
+
+# 输出配置
+output:
+  panel_dir: "reviews/expert_simulation"
+  panel_filename_pattern: "panel_{N}_{expert_id}.md"
+  aggregated_filename: "aggregated_report.md"
+
+# Guardrails
+guardrails:
+  allowed_write_files:
+    - "reviews/expert_simulation/*.md"
+  forbidden_write_files:
+    - "sections/**"
+    - "planning/**"
+    - "config/**"
+  read_only: false                   # 需要写入评审报告

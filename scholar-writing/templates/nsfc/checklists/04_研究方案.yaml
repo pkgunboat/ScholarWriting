@@ -1,0 +1,57 @@
+# 研究方案章节评审清单
+section: 研究方案
+target_length: "4-6页"
+reviewers: [R1, R2, R3]
+
+checklist:
+  logic:
+    - id: L1
+      criterion: "每个研究方案应与研究内容条目一一对应，覆盖所有研究内容"
+      weight: critical
+
+    - id: L2
+      criterion: "技术路线应体现清晰的逻辑流程，各步骤之间有明确的输入输出关系"
+      weight: high
+
+    - id: L3
+      criterion: "年度计划的时间安排应合理，关键节点之间留有衔接时间"
+      weight: high
+
+    - id: L4
+      criterion: "所选方法应有理论或实验依据支撑其可行性"
+      weight: high
+
+  de_ai:
+    - id: D1
+      criterion: "方案描述应具体到方法名称、算法细节或数据来源，避免泛泛而谈"
+      weight: high
+      few_shot: "好：采用CLIP模型提取GUI截图的视觉特征，与DOM树文本特征进行跨模态对齐。差：利用先进的深度学习技术进行特征提取和分析。"
+
+    - id: D2
+      criterion: "每个步骤应说明具体采用的技术手段，而非仅描述目标"
+      weight: medium
+
+    - id: D3
+      criterion: "避免使用'优化''改进'等词而不说明具体优化策略"
+      weight: medium
+
+  completeness:
+    - id: C1
+      criterion: "每个研究内容应有对应的详细技术方案"
+      weight: critical
+
+    - id: C2
+      criterion: "应包含明确的评估指标和验证方法"
+      weight: high
+
+    - id: C3
+      criterion: "应包含合理的年度时间表，明确各阶段的任务和产出"
+      weight: high
+
+    - id: C4
+      criterion: "应包含技术路线的整体描述或流程图说明"
+      weight: high
+
+    - id: C5
+      criterion: "应说明关键实验的数据集来源和实验设置"
+      weight: medium

@@ -1,0 +1,40 @@
+skill_info:
+  name: writer-nsfc-research-plan
+  version: "0.1.0"
+  category: writing
+  description: "国自然研究方案章节写作"
+
+parameters:
+  inputs:
+    - name: research_content
+      path: "sections/02_研究内容.md"
+      required: true
+    - name: claim_registry
+      path: "planning/claim_registry.md"
+      required: true
+  outputs:
+    - name: section
+      path: "sections/03_研究方案.md"
+    - name: roadmap
+      path: "figures/technical_roadmap.mmd"
+
+guardrails:
+  allowed_write_files:
+    - "sections/03_研究方案.md"
+    - "figures/technical_roadmap.mmd"
+  forbidden_write_files:
+    - "sections/01_*.md"
+    - "sections/02_*.md"
+    - "planning/**"
+  read_only: false
+
+settings:
+  word_count:
+    range: [5000, 8000]
+  page_target: [3, 5]
+  generate_mermaid_roadmap: true
+  annual_plan:
+    duration_years: 4
+    align_with_content: true
+  feasibility_inline: true
+  backup_plan_required: true

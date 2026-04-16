@@ -1,0 +1,25 @@
+# 章节依赖图 - 定义写作顺序
+# 由 Architect Agent 生成，可根据具体项目调整
+
+sections:
+  立项依据:
+    depends_on: []
+    priority: 1
+  研究内容:
+    depends_on: [立项依据]
+    priority: 2
+  研究方案:
+    depends_on: [研究内容]
+    priority: 3
+  可行性分析:
+    depends_on: [研究方案]
+    priority: 4
+  创新点:
+    depends_on: [研究内容, 研究方案]
+    priority: 4
+  研究基础:
+    depends_on: [研究内容]
+    priority: 4
+  摘要:
+    depends_on: [立项依据, 研究内容, 创新点]
+    priority: 5

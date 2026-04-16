@@ -1,0 +1,39 @@
+# Markdown 正文格式校验规则（正则模式集合）
+# validate.py 根据数据类型和 project_type 选择对应规则组
+
+review_report:
+  required_patterns:
+    - name: "评分表格"
+      pattern: '^\|\s*ID\s*\|\s*Criterion\s*\|\s*Score\s*\|\s*Justification\s*\|'
+      description: "必须包含标准评分表格头"
+    - name: "评分行"
+      pattern: '^\|\s*[A-Z]\d+\s*\|'
+      min_count: 1
+      description: "至少包含一行评分数据"
+    - name: "修改建议"
+      pattern: '^\s*-\s*\[(Critical|Major|Minor)\]'
+      min_count: 0
+      description: "修改建议按严重级别标注（可选）"
+  score_validation:
+    pattern: '^\|\s*([A-Z]\d+)\s*\|[^|]*\|\s*(\d+)\s*\|'
+    score_range: [0, 100]
+
+outline:
+  # 以下规则仅适用于 NSFC 模板。
+  # paper 类型需增加独立的规则组。validate.py 根据 config.project.type 过滤。
+  required_patterns:
+    - name: "章节标题"
+      pattern: '^###\s+(一|二|三|四|五|六|七)、'
+      min_count: 7
+      description: "NSFC 大纲必须包含 7 个章节标题"
+      applies_to: [nsfc]
+
+claim_registry:
+  required_patterns:
+    - name: "论点表格"
+      pattern: '^\|\s*论点ID\s*\|\s*核心论点\s*\|'
+      description: "必须包含论点注册表表头"
+    - name: "论点行"
+      pattern: '^\|\s*C\d+\s*\|'
+      min_count: 1
+      description: "至少包含一条论点记录"

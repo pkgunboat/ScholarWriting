@@ -1,0 +1,40 @@
+skill_info:
+  name: writer-nsfc-research-content
+  version: "0.1.0"
+  category: writing
+  description: "国自然研究内容章节写作"
+
+parameters:
+  inputs:
+    - name: outline
+      path: "planning/outline.md"
+      required: true
+    - name: justification
+      path: "sections/01_立项依据.md"
+      required: true
+    - name: claim_registry
+      path: "planning/claim_registry.md"
+      required: true
+  outputs:
+    - name: section
+      path: "sections/02_研究内容.md"
+
+guardrails:
+  allowed_write_files:
+    - "sections/02_研究内容.md"
+  forbidden_write_files:
+    - "sections/01_*.md"
+    - "planning/**"
+  read_only: false
+
+settings:
+  writing_mode: two_stage
+  word_count:
+    range: [10000, 14000]
+  page_target: [6, 8]
+  content_items:
+    min: 3
+    max: 5
+  objectives_max: 3
+  internal_numbering: true
+  consistency_check: true

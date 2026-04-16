@@ -1,0 +1,49 @@
+skill_info:
+  name: revision-agent
+  version: "0.1.0"
+  category: revision
+  description: "根据审阅意见定向修改章节，支持篇幅调整模式，输出影响分析"
+
+parameters:
+  inputs:
+    - name: section
+      path: "sections/*.md"
+      required: true
+    - name: reviews
+      path: "reviews/**/*.md"
+      required: true
+    - name: claim_registry
+      path: "planning/claim_registry.md"
+      required: true
+  outputs:
+    - name: section
+      path: "sections/*.md"
+    - name: change_log
+      path: "change_logs/*.md"
+    - name: claim_registry
+      path: "planning/claim_registry.md"
+
+guardrails:
+  allowed_write_files:
+    - "sections/*.md"
+    - "change_logs/*.md"
+    - "planning/claim_registry.md"
+  forbidden_write_files:
+    - "config/**"
+    - "templates/**"
+    - "reviews/**"
+  read_only: false
+
+settings:
+  conservative_mode: true
+  length_adjustment:
+    enabled: true
+    compress_max_rounds: 3
+    expand_max_rounds: 3
+  impact_analysis:
+    required: true
+    auto_mark_rules:
+      - "claim_registry论点变更"
+      - "研究内容编号变更"
+      - "关键术语变更"
+      - "研究内容条目增删"

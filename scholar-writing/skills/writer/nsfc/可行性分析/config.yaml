@@ -1,0 +1,38 @@
+skill_info:
+  name: writer-nsfc-feasibility
+  version: "0.1.0"
+  category: writing
+  description: "国自然可行性分析章节写作"
+
+parameters:
+  inputs:
+    - name: research_plan
+      path: "sections/03_研究方案.md"
+      required: true
+    - name: claim_registry
+      path: "planning/claim_registry.md"
+      required: true
+  outputs:
+    - name: section
+      path: "sections/04_可行性分析.md"
+
+guardrails:
+  allowed_write_files:
+    - "sections/04_可行性分析.md"
+  forbidden_write_files:
+    - "sections/01_*.md"
+    - "sections/02_*.md"
+    - "sections/03_*.md"
+    - "planning/**"
+  read_only: false
+
+settings:
+  word_count:
+    range: [1500, 3000]
+  page_target: [1, 2]
+  dimensions:
+    - "方案可行性"
+    - "条件可行性"
+    - "能力可行性"
+  writing_style: inline
+  evidence_required: true

@@ -1,0 +1,20 @@
+skill_info:
+  name: reviewer-feasibility
+  version: "0.1.0"
+  category: reviewing
+  description: "可行性审阅：方案具体度、时间规划、团队匹配"
+
+guardrails:
+  allowed_write_files:
+    - "reviews/global/R6_feasibility.md"
+  forbidden_write_files:
+    - "sections/**"
+    - "planning/**"
+  read_only: false
+
+settings:
+  two_step_method: true
+  conditional_trigger: true
+  trigger_on_sections:
+    - "研究方案"
+    - "可行性分析"

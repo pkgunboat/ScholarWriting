@@ -1,0 +1,14 @@
+# planning/claim_registry.md 的 frontmatter JSON Schema 定义
+# 注：generated_from 枚举值不带 from_ 前缀，与 config.input_mode 有区别。
+# input_mode 描述用户选择的工作流入口，generated_from 描述数据的实际来源。
+type: object
+required: [claims_count, generated_from]
+properties:
+  claims_count:
+    type: integer
+    minimum: 1
+  generated_from:
+    type: string
+    enum: [materials, outline, draft]
+  last_updated:
+    type: string

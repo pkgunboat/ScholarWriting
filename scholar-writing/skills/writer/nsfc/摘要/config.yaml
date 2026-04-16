@@ -1,0 +1,39 @@
+skill_info:
+  name: writer-nsfc-abstract
+  version: "0.1.0"
+  category: writing
+  description: "国自然摘要章节写作（中英文双摘要）"
+
+parameters:
+  inputs:
+    - name: all_sections
+      path: "sections/*.md"
+      required: true
+    - name: claim_registry
+      path: "planning/claim_registry.md"
+      required: true
+  outputs:
+    - name: section
+      path: "sections/07_摘要.md"
+
+guardrails:
+  allowed_write_files:
+    - "sections/07_摘要.md"
+  forbidden_write_files:
+    - "sections/01_*.md"
+    - "sections/02_*.md"
+    - "sections/03_*.md"
+    - "sections/04_*.md"
+    - "sections/05_*.md"
+    - "sections/06_*.md"
+    - "planning/**"
+  read_only: false
+
+settings:
+  structure: seven_sentence_model
+  chinese_chars_limit: 400
+  english_chars_limit: 4000
+  keywords_count: [3, 5]
+  compression_max_rounds: 3
+  keyword_front_load: true
+  keyword_front_chars: 20

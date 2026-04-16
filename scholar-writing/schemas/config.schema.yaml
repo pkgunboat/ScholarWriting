@@ -1,0 +1,84 @@
+# config.yaml 的 JSON Schema 定义
+type: object
+required: [project, convergence, score_weights, checklist_weight_map, critical_threshold]
+properties:
+  project:
+    type: object
+    required: [type, template, input_mode, language]
+    properties:
+      type:
+        type: string
+        enum: [nsfc, paper]
+      template:
+        type: string
+      input_mode:
+        type: string
+        enum: [from_materials, from_outline, from_draft]
+      language:
+        type: string
+        enum: [zh, en]
+  convergence:
+    type: object
+    required: [section_score_threshold, global_score_threshold, max_major_issues, max_section_rounds, max_global_rounds]
+    properties:
+      section_score_threshold:
+        type: number
+        minimum: 0
+        maximum: 100
+      global_score_threshold:
+        type: number
+        minimum: 0
+        maximum: 100
+      max_section_rounds:
+        type: integer
+        minimum: 1
+        maximum: 10
+      max_global_rounds:
+        type: integer
+        minimum: 1
+        maximum: 5
+      max_major_issues:
+        type: integer
+        minimum: 0
+      human_intervention_on_timeout:
+        type: boolean
+      full_consistency_check_interval:
+        type: integer
+        minimum: 1
+  score_weights:
+    type: object
+    required: [section, global]
+    properties:
+      section:
+        type: object
+        required: [logic, de_ai, completeness]
+        additionalProperties:
+          type: number
+          minimum: 0
+          maximum: 1
+      global:
+        type: object
+        required: [consistency, narrative, feasibility, format]
+        additionalProperties:
+          type: number
+          minimum: 0
+          maximum: 1
+  checklist_weight_map:
+    type: object
+    required: [critical, high, medium]
+    properties:
+      critical:
+        type: integer
+        minimum: 1
+      high:
+        type: integer
+        minimum: 1
+      medium:
+        type: integer
+        minimum: 1
+  critical_threshold:
+    type: number
+    minimum: 0
+    maximum: 100
+  dry_run:
+    type: boolean

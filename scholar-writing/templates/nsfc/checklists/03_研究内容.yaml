@@ -1,0 +1,53 @@
+# 研究内容章节评审清单
+section: 研究内容
+target_length: "2-3页"
+reviewers: [R1, R2, R3]
+
+checklist:
+  logic:
+    - id: L1
+      criterion: "每个研究内容应与立项依据中识别的研究空白一一对应"
+      weight: critical
+
+    - id: L2
+      criterion: "研究内容条目之间应体现逻辑递进或互补关系，而非孤立并列"
+      weight: high
+
+    - id: L3
+      criterion: "每个研究内容的预期产出应可观测、可验证"
+      weight: high
+
+    - id: L4
+      criterion: "研究目标应从研究内容中自然归纳，而非脱离内容的独立表述"
+      weight: high
+
+  de_ai:
+    - id: D1
+      criterion: "每个研究内容的描述应包含具体技术细节，避免模板化的泛泛表述"
+      weight: medium
+      few_shot: "好：研究基于视觉-语言对齐的GUI元素细粒度定位方法，构建多尺度特征融合框架。差：研究新型智能方法，提升系统性能。"
+
+    - id: D2
+      criterion: "研究目标应量化或可判定，避免'深入研究''系统探索'等空洞目标"
+      weight: high
+
+    - id: D3
+      criterion: "避免不同研究内容使用高度相似的句式结构"
+      weight: medium
+
+  completeness:
+    - id: C1
+      criterion: "研究内容应包含3-4个相对独立又有内在联系的条目"
+      weight: high
+
+    - id: C2
+      criterion: "每个研究内容应有明确的研究边界，说明做什么和不做什么"
+      weight: high
+
+    - id: C3
+      criterion: "所有研究内容应与立项依据中的科学问题形成完整呼应"
+      weight: critical
+
+    - id: C4
+      criterion: "应包含研究目标的简洁总结，概括整体预期成果"
+      weight: high

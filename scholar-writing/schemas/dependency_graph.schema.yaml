@@ -1,0 +1,17 @@
+# planning/dependency_graph.yaml 的 JSON Schema 定义
+type: object
+required: [sections]
+properties:
+  sections:
+    type: object
+    additionalProperties:
+      type: object
+      required: [depends_on, priority]
+      properties:
+        depends_on:
+          type: array
+          items:
+            type: string
+        priority:
+          type: integer
+          minimum: 1

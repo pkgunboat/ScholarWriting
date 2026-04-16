@@ -1,0 +1,35 @@
+skill_info:
+  name: pipeline-orchestrator
+  version: "0.1.0"
+  category: orchestration
+  description: "学术写作全流程编排器"
+
+parameters:
+  inputs:
+    - name: config
+      path: "config/default_config.yaml"
+      required: true
+    - name: template
+      path: "templates/nsfc/*.yaml"
+      required: true
+  outputs:
+    - name: sections
+      path: "sections/"
+    - name: reviews
+      path: "reviews/"
+    - name: scores
+      path: "scores.yaml"
+
+settings:
+  entry_modes:
+    - from_materials
+    - from_outline
+    - from_draft
+  dry_run: false
+  parallel_review: true
+  expert_simulation:
+    enabled: true
+    trigger: post_convergence
+  length_management:
+    enabled: true
+    check_interval: after_each_revision

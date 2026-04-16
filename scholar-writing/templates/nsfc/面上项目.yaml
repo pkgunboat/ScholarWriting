@@ -1,0 +1,74 @@
+# 面上项目模板
+extends: nsfc/base
+name: 面上项目
+
+constraints:
+  total_pages: 20
+  section_ratios:
+    立项依据: { min: 0.25, max: 0.35 }
+    研究方案: { min: 0.30, max: 0.40 }
+
+# P1.5 篇幅主动管理配置
+length_management:
+  enabled: true
+
+  # 各章节目标篇幅
+  section_targets:
+    摘要:
+      chars: 400
+      tolerance: 20
+      unit: "字符"
+      priority: "精炼"
+    立项依据:
+      pages: [5, 7]
+      chars: [8000, 10000]
+      priority: "该厚"           # 核心章节，内容充实
+    研究内容:
+      pages: [6, 8]
+      chars: [10000, 14000]
+      priority: "该厚"           # 核心章节
+    研究方案:
+      pages: [3, 5]
+      chars: [5000, 8000]
+      priority: "适中"
+    可行性分析:
+      pages: [1, 2]
+      chars: [1500, 3000]
+      priority: "该瘦"           # 精简，证据驱动
+    创新点:
+      pages: [0.5, 1]
+      chars: [800, 1500]
+      priority: "该瘦"           # 极精炼
+    研究基础:
+      pages: [2, 3]
+      chars: [3000, 5000]
+      priority: "适中"
+
+  # 压缩策略（超预算时）
+  compress:
+    priority:
+      - "删除冗余修饰词和空洞表述"
+      - "合并重复或相近的论述"
+      - "精简过渡段落"
+      - "压缩引文描述（保留核心贡献，删除细节）"
+    max_rounds: 3
+    preserve:
+      - "核心论点和科学问题表述"
+      - "关键数据和量化指标"
+      - "必要引文（critical权重的支撑文献）"
+
+  # 扩写策略（欠预算时）
+  expand:
+    priority:
+      - "补充实验细节和技术参数"
+      - "增加文献支撑（特别是近3年文献）"
+      - "深化机制讨论和理论分析"
+      - "添加具体案例或应用场景"
+    max_rounds: 3
+    avoid:
+      - "注水式扩写（重复同一论点的不同说法）"
+      - "添加与核心问题无关的背景信息"
+
+  # 总页数红线
+  total_pages_hard_limit: 20
+  total_pages_warning: 18

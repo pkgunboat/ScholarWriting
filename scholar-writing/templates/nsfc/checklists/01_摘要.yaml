@@ -1,0 +1,53 @@
+# 摘要章节评审清单
+section: 摘要
+target_length: "300-500字"
+reviewers: [R1, R2, R3]
+
+checklist:
+  logic:
+    - id: L1
+      criterion: "摘要应包含完整的三段式结构：研究目的、研究方法、预期成果"
+      weight: critical
+
+    - id: L2
+      criterion: "关键词应与正文核心术语保持一致，能准确概括研究主题"
+      weight: high
+
+    - id: L3
+      criterion: "研究目的应直接对应立项依据中提出的科学问题"
+      weight: high
+
+    - id: L4
+      criterion: "研究方法描述应与研究方案中的技术路线一致"
+      weight: high
+
+  de_ai:
+    - id: D1
+      criterion: "避免空洞宏大叙事，每句话应包含具体信息量"
+      weight: high
+      few_shot: "好：本项目拟通过多模态融合方法解决GUI元素定位精度不足的问题。差：本项目将深入研究人工智能领域的前沿问题。"
+
+    - id: D2
+      criterion: "避免使用'具有重要意义''亟待解决'等套话作为开头"
+      weight: medium
+
+    - id: D3
+      criterion: "预期成果描述应具体可衡量，避免'取得突破''显著提升'等模糊表述"
+      weight: high
+
+  completeness:
+    - id: C1
+      criterion: "关键词前20字应包含项目核心技术术语"
+      weight: high
+
+    - id: C2
+      criterion: "摘要总字数应控制在500字以内"
+      weight: critical
+
+    - id: C3
+      criterion: "研究目的、研究方法、预期成果三要素应齐全且各占合理比例"
+      weight: critical
+
+    - id: C4
+      criterion: "关键词应包含3-5个，覆盖研究领域、方法和应用场景"
+      weight: medium

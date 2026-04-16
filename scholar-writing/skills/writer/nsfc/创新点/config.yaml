@@ -1,0 +1,42 @@
+skill_info:
+  name: writer-nsfc-innovation
+  version: "0.1.0"
+  category: writing
+  description: "国自然创新点章节写作"
+
+parameters:
+  inputs:
+    - name: justification
+      path: "sections/01_立项依据.md"
+      required: true
+    - name: research_content
+      path: "sections/02_研究内容.md"
+      required: true
+    - name: claim_registry
+      path: "planning/claim_registry.md"
+      required: true
+  outputs:
+    - name: section
+      path: "sections/05_创新点.md"
+
+guardrails:
+  allowed_write_files:
+    - "sections/05_创新点.md"
+  forbidden_write_files:
+    - "sections/01_*.md"
+    - "sections/02_*.md"
+    - "planning/**"
+  read_only: false
+
+settings:
+  word_count:
+    range: [800, 1500]
+  page_target: [0.5, 1]
+  innovation_points:
+    min: 2
+    max: 3
+  consistency_check_with_justification: true
+  forbidden_phrases:
+    - "填补国内/国际空白"
+    - "首次发现"
+    - "开创性"

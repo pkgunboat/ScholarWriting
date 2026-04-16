@@ -1,0 +1,55 @@
+# scores.yaml 的 JSON Schema 定义
+type: object
+required: [phase, global_round, sections]
+properties:
+  phase:
+    type: string
+    enum: [init, section_writing, section_review, revision, global_review, human_needed, completed]
+  global_round:
+    type: integer
+    minimum: 0
+  force_full_recheck:
+    type: boolean
+  sections:
+    type: object
+    additionalProperties:
+      type: object
+      required: [status, current_round]
+      properties:
+        status:
+          type: string
+          enum: [pending, writing, reviewing, revising, approved, human_needed]
+        current_round:
+          type: integer
+          minimum: 0
+        current_score:
+          type: number
+          minimum: 0
+          maximum: 100
+        rounds_used:
+          type: integer
+        inner_scores:
+          type: array
+          items:
+            type: number
+        outer_scores:
+          type: array
+          items:
+            type: number
+        last_reviewer_scores:
+          type: object
+        reviewer_feedback:
+          type: ["string", "null"]
+        last_updated:
+          type: string
+  global_scores:
+    type: object
+  token_usage:
+    type: object
+    properties:
+      total_input:
+        type: integer
+      total_output:
+        type: integer
+      by_agent:
+        type: object

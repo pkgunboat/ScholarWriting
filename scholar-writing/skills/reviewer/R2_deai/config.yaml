@@ -1,0 +1,138 @@
+# R2 去AI化 Reviewer - 配置文件
+# 按章节类型、学科领域和检测强度三维度分层检测
+
+skill_info:
+  name: reviewer-deai
+  version: "0.1.0"
+  category: reviewing
+  description: "检测中文学术写作中的 AI 生成痕迹，按三个维度分层检测并提供改写建议"
+
+# 维度1：章节类型风格矩阵
+chapter_style_targets:
+  摘要:
+    target: "精炼、信息密度高、无修饰"
+    tolerance: strict
+    key_check:
+      - "公式化开头"
+      - "空洞修饰"
+      - "过度对冲"
+  立项依据:
+    target: "严谨、有说服力、述评结合"
+    tolerance: moderate
+    key_check:
+      - "模板化过渡"
+      - "空洞宏大叙事"
+      - "机械化列举"
+  研究内容:
+    target: "清晰、逻辑递进、具体可操作"
+    tolerance: moderate
+    key_check:
+      - "排比式堆砌"
+      - "过度承诺"
+      - "空泛目标"
+  研究方案:
+    target: "技术性强、步骤明确、可复现"
+    tolerance: lenient
+    key_check:
+      - "过度模糊"
+      - "缺乏细节"
+  可行性分析:
+    target: "证据驱动、具体可查证"
+    tolerance: moderate
+    key_check:
+      - "自吹自擂"
+      - "空洞承诺"
+  创新点:
+    target: "差异化明确、可验证"
+    tolerance: strict
+    key_check:
+      - "绝对化表述"
+      - "禁用词"
+  研究基础:
+    target: "事实罗列、关联清晰"
+    tolerance: lenient
+    key_check:
+      - "夸大成果"
+      - "无关堆砌"
+
+# 维度2：学科领域调整
+field_adjustments:
+  cs_ai:
+    name: "计算机/人工智能"
+    acceptable:
+      - "技术术语密集"
+      - "方法对比表述"
+    flag:
+      - "过度营销式表述"
+  life_science:
+    name: "生命科学/医学"
+    acceptable:
+      - "假说驱动表述"
+      - "实验描述模式化"
+    flag:
+      - "统计描述过于笼统"
+  engineering:
+    name: "工程类"
+    acceptable:
+      - "性能指标列举"
+      - "工程术语"
+    flag:
+      - "缺乏量化指标的定性描述"
+  social_science:
+    name: "社会科学"
+    acceptable:
+      - "理论框架引用"
+      - "案例分析模式"
+    flag:
+      - "过度理论化"
+
+# 维度3：检测强度控制
+detection_strength:
+  minimal:
+    description: "仅检测最明显的AI痕迹"
+    patterns:
+      - "公式化开头"
+      - "禁用词"
+    action: flag_only
+  moderate:
+    description: "标准检测（默认）"
+    patterns:
+      - "公式化开头"
+      - "过度对冲"
+      - "模板化过渡"
+      - "机械化结构"
+    action: flag_and_suggest
+  aggressive:
+    description: "深度检测"
+    patterns: all
+    action: flag_suggest_and_rewrite
+
+# 默认配置
+defaults:
+  field: cs_ai
+  strength: moderate
+
+# 评分区间定义
+scoring:
+  ranges:
+    - range: [80, 100]
+      label: "自然流畅"
+      description: "读起来像人写的"
+    - range: [60, 79]
+      label: "轻微痕迹"
+      description: "有轻微AI痕迹，不影响阅读"
+    - range: [40, 59]
+      label: "明显痕迹"
+      description: "AI痕迹明显，需要修改"
+    - range: [0, 39]
+      label: "严重痕迹"
+      description: "严重的AI生成感，必须重写"
+
+# Guardrails
+guardrails:
+  allowed_write_files:
+    - "reviews/*/R2_deai.md"
+  forbidden_write_files:
+    - "sections/**"
+    - "planning/**"
+  read_only: false

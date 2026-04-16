@@ -1,0 +1,168 @@
+# 状态追踪文件 - 示例（展示 2 轮内环 + 1 轮外环后的状态）
+# 由 Pipeline 自动生成和更新，支持断点恢复
+
+phase: global_review
+global_round: 1
+
+sections:
+  立项依据:
+    status: approved
+    current_round: 2
+    rounds_used: 2
+    current_score: 84.2
+    last_reviewer_scores:
+      logic: 86
+      de_ai: 80
+      completeness: 88
+    inner_scores:
+      - round: 1
+        logic: 72
+        de_ai: 68
+        completeness: 75
+        weighted: 71.8
+        flagged: []
+      - round: 2
+        logic: 86
+        de_ai: 80
+        completeness: 88
+        weighted: 84.2
+        flagged: []
+    last_updated: "2026-04-15T10:30:00"
+
+  研究内容:
+    status: approved
+    current_round: 1
+    rounds_used: 1
+    current_score: 82.5
+    last_reviewer_scores:
+      logic: 85
+      de_ai: 78
+      completeness: 84
+    inner_scores:
+      - round: 1
+        logic: 85
+        de_ai: 78
+        completeness: 84
+        weighted: 82.5
+        flagged: []
+    last_updated: "2026-04-15T11:00:00"
+
+  研究方案:
+    status: approved
+    current_round: 2
+    rounds_used: 2
+    current_score: 81.0
+    last_reviewer_scores:
+      logic: 82
+      de_ai: 76
+      completeness: 86
+    inner_scores:
+      - round: 1
+        logic: 70
+        de_ai: 72
+        completeness: 78
+        weighted: 73.0
+        flagged: []
+      - round: 2
+        logic: 82
+        de_ai: 76
+        completeness: 86
+        weighted: 81.0
+        flagged: []
+    last_updated: "2026-04-15T12:00:00"
+
+  可行性分析:
+    status: approved
+    current_round: 1
+    rounds_used: 1
+    current_score: 85.0
+    last_reviewer_scores:
+      logic: 88
+      de_ai: 80
+      completeness: 86
+    inner_scores:
+      - round: 1
+        logic: 88
+        de_ai: 80
+        completeness: 86
+        weighted: 85.0
+        flagged: []
+    last_updated: "2026-04-15T12:30:00"
+
+  创新点:
+    status: approved
+    current_round: 1
+    rounds_used: 1
+    current_score: 80.5
+    last_reviewer_scores:
+      logic: 82
+      de_ai: 76
+      completeness: 82
+    inner_scores:
+      - round: 1
+        logic: 82
+        de_ai: 76
+        completeness: 82
+        weighted: 80.5
+        flagged: []
+    last_updated: "2026-04-15T13:00:00"
+
+  研究基础:
+    status: approved
+    current_round: 1
+    rounds_used: 1
+    current_score: 83.0
+    last_reviewer_scores:
+      logic: 84
+      de_ai: 82
+      completeness: 82
+    inner_scores:
+      - round: 1
+        logic: 84
+        de_ai: 82
+        completeness: 82
+        weighted: 83.0
+        flagged: []
+    last_updated: "2026-04-15T13:30:00"
+
+  摘要:
+    status: approved
+    current_round: 1
+    rounds_used: 1
+    current_score: 81.0
+    last_reviewer_scores:
+      logic: 80
+      de_ai: 82
+      completeness: 80
+    inner_scores:
+      - round: 1
+        logic: 80
+        de_ai: 82
+        completeness: 80
+        weighted: 81.0
+        flagged: []
+    last_updated: "2026-04-15T14:00:00"
+
+global:
+  round_1:
+    consistency: 78
+    narrative: 75
+    feasibility: 82
+    format: 90
+    weighted_total: 79.3
+
+change_history:
+  - round: 1
+    changes: 8
+    critical: 1
+    major: 3
+    minor: 4
+
+token_usage:
+  total_input: 185000
+  total_output: 62000
+  by_agent:
+    architect: { input: 15000, output: 8000 }
+    writer: { input: 85000, output: 30000 }
+    reviewer: { input: 70000, output: 18000 }
+    revision: { input: 15000, output: 6000 }

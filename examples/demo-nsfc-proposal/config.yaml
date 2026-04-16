@@ -1,0 +1,35 @@
+# 示例项目配置 - NSFC 面上项目
+project:
+  name: "基于多模态感知的智能人机交互关键技术研究"
+  type: nsfc
+  template: 面上项目
+  input_mode: from_materials
+  language: zh
+
+convergence:
+  section_score_threshold: 80
+  global_score_threshold: 85
+  max_major_issues: 2
+  max_section_rounds: 3
+  max_global_rounds: 5
+  human_intervention_on_timeout: true
+  full_consistency_check_interval: 2
+
+score_weights:
+  section:
+    logic: 0.40
+    de_ai: 0.25
+    completeness: 0.35
+  global:
+    consistency: 0.30
+    narrative: 0.35
+    feasibility: 0.20
+    format: 0.15
+
+checklist_weight_map:
+  critical: 3
+  high: 2
+  medium: 1
+
+critical_threshold: 60
+dry_run: false
