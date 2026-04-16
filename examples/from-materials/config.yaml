@@ -1,0 +1,16 @@
+# 示例：从素材开始 (from_materials)
+# 适用场景：已有研究素材（论文、笔记、实验数据），从零开始生成申报书
+#
+# 使用方法：
+#   1. 将研究素材放入 materials/ 目录
+#   2. 编辑 materials/manifest.yaml 登记素材信息
+#   3. 在 Claude Code 中运行：写申报书
+#
+# 系统流程：Architect 分析素材 → 生成大纲(需确认) → 逐章写作 → 审阅 → 修订
+
+project:
+  name: "基于多模态感知的智能人机交互关键技术研究"
+  type: nsfc
+  template: 面上项目
+  input_mode: auto    # 自动检测到 materials/ → from_materials
+  language: zh

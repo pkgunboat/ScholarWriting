@@ -1,0 +1,26 @@
+# 素材清单
+# 在此登记你的研究素材，系统会根据 relevance 字段将素材分配给对应章节
+#
+# type 可选值: paper(论文), note(笔记), experiment(实验数据), slides(报告)
+# relevance: 该素材与哪些章节相关
+
+materials:
+  - file: "前期论文_多模态融合综述.pdf"
+    type: paper
+    description: "团队发表的多模态信息融合综述，覆盖 2020-2025 主要方法"
+    relevance: [立项依据, 研究基础]
+
+  - file: "研究构想.md"
+    type: note
+    description: "对本项目技术路线的初步构想和创新点分析"
+    relevance: [研究内容, 研究方案, 创新点]
+
+  - file: "实验数据_用户评测.xlsx"
+    type: experiment
+    description: "前期原型系统的用户评测数据（50人，3轮）"
+    relevance: [研究基础, 可行性分析]
+
+  - file: "团队简介.md"
+    type: note
+    description: "项目组成员简介和前期成果列表"
+    relevance: [研究基础, 可行性分析]

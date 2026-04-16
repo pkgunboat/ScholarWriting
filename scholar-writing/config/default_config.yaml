@@ -2,7 +2,7 @@
 project:
   type: nsfc
   template: 面上项目
-  input_mode: from_materials  # from_materials | from_outline | from_draft
+  input_mode: auto  # auto | from_materials | from_outline | from_draft
   language: zh
 
 convergence:

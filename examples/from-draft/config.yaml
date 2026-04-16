@@ -1,0 +1,15 @@
+# 示例：从初稿开始 (from_draft)
+# 适用场景：已有各章节初稿，希望通过系统的多维度评审来优化
+#
+# 使用方法：
+#   1. 将各章节初稿放入 sections/ 目录（命名: 01_摘要.md, 02_立项依据.md, ...）
+#   2. 在 Claude Code 中运行：写申报书
+#
+# 系统流程：跳过 Architect 和 Writer → 直接进入审阅 → 修订 → 迭代优化
+
+project:
+  name: "基于大语言模型的自动化代码审查研究"
+  type: nsfc
+  template: 面上项目
+  input_mode: auto    # 自动检测到 sections/*.md → from_draft
+  language: zh
