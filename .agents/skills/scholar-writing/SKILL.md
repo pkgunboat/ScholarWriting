@@ -55,3 +55,25 @@ Use this skill when the user asks for academic writing, NSFC/国自然 proposal 
 - `from_draft`: `sections/*.md` exists. Start with review and revision.
 
 When `config.yaml` uses `input_mode: auto`, the CLI detects the effective mode in this priority: draft sections, outline, materials.
+
+## Developer Debugging
+
+When developing inside the ScholarWriting source repository, this repo-local skill is the debuggable Codex entrypoint. Use it with the source `.codex/agents` files and the source CLI.
+
+Recommended local smoke commands:
+
+```bash
+uv run scholar-writing next examples/from-materials --format json
+uv run scholar-writing next examples/from-outline --format json
+uv run scholar-writing next examples/from-draft --format json
+uv run scholar-writing taskpack examples/from-draft --format json
+uv run pytest -q
+```
+
+Expected first actions:
+
+- `examples/from-materials` -> `run_architect`
+- `examples/from-outline` -> `run_writer`
+- `examples/from-draft` -> `run_reviewers`
+
+Use `.codex/agents` directly when testing custom agent wording or handoff contracts before installing into the global Codex home.

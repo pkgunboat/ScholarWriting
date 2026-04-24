@@ -1,8 +1,16 @@
+import os
 from pathlib import Path
 
 
 def find_repo_root(start=None):
     """Find the repository root by walking upward from start."""
+    runtime_root = os.environ.get("SCHOLAR_WRITING_RUNTIME")
+    if runtime_root:
+        candidate = Path(runtime_root).resolve()
+        if (candidate / "README.md").exists() and (candidate / "scholar-writing").is_dir():
+            return candidate
+        raise FileNotFoundError(f"SCHOLAR_WRITING_RUNTIME is not a ScholarWriting runtime: {candidate}")
+
     current = Path(start or Path.cwd()).resolve()
     if current.is_file():
         current = current.parent
