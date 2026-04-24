@@ -25,5 +25,15 @@ properties:
           type: array
           items:
             type: string
+        reference_basis:
+          type: array
+          items:
+            type: object
+            required: [id]
+            properties:
+              id:
+                type: string
+              rule:
+                type: string
   requires_user_confirmation:
     type: boolean

@@ -13,7 +13,10 @@ Use this skill when the user asks for academic writing, NSFC/国自然 proposal 
 - Use `uv run scholar-writing taskpack <project_dir> --format json` to build the current agent handoff payload before delegating to a custom agent.
 - Use `uv run scholar-writing advance <project_dir> --format json` to record the computed next action back into `scores.yaml`.
 - Treat `scores.yaml` as the state source. Do not infer loop state only from prose.
+- Treat `taskpack.reference_inputs` as quality rules for writing, review, and revision. Pass these referenced files to the custom agent as framework rules, not as user evidence.
+- Before invoking a custom agent, inspect `reference_inputs`. Load `required` first, then `section_specific`, then `optional` if context budget allows.
 - Use repo paths relative to the user's project directory, not relative to this skill directory.
+- Do not load every file under `scholar-writing/references/` unless the user explicitly asks for a full reference audit.
 - Do not use Claude Code `Agent(...)` pseudo-calls. In Codex, use project custom agents from `.codex/agents/` when agent delegation is appropriate.
 - Use subagents only when the task boundary is clear and parallelism materially helps. Keep serial or tightly coupled state transitions in the main agent.
 - Ordinary major/minor revision issues may be handled automatically. Critical, core-claim-changing, large-scope, or cross-section changes require user confirmation before editing sections.
@@ -28,7 +31,8 @@ Use this skill when the user asks for academic writing, NSFC/国自然 proposal 
    uv run scholar-writing taskpack <project_dir> --format json
    ```
 
-3. Follow the returned `action`:
+3. Inspect `reference_inputs` in the task pack. These files are quality rules selected by the deterministic controller.
+4. Follow the returned `action`:
 
    - `run_architect`: use `scholar-architect` to produce or update `planning/outline.md`, `planning/claim_registry.md`, and `planning/dependency_graph.yaml`.
    - `run_writer`: use `scholar-writer` for the target chapter in `sections/`.
@@ -36,8 +40,8 @@ Use this skill when the user asks for academic writing, NSFC/国自然 proposal 
    - `run_revision`: use `scholar-revision` only within the task pack write boundary.
    - `ask_user`: stop and ask the user for the missing input or required confirmation.
 
-4. After every agent output, update or verify `scores.yaml`, then run `uv run scholar-writing next <project_dir> --format json` again.
-5. Before claiming the workflow is complete, run:
+5. After every agent output, update or verify `scores.yaml`, then run `uv run scholar-writing next <project_dir> --format json` again.
+6. Before claiming the workflow is complete, run:
 
    ```bash
    uv run pytest -q

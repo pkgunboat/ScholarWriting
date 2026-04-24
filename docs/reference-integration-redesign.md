@@ -1,5 +1,15 @@
 # References 接入改造方案
 
+## 实施状态
+
+已落地到当前 Codex workflow：
+
+- 已新增 reference registry 和 schema。
+- `taskpack` 已输出 `reference_inputs`。
+- Codex skill、custom agents 和平台无关 prompts 已要求读取 `reference_inputs`。
+- `review_result` 与 `revision_log` 已支持 `reference_basis`。
+- README、Codex 使用文档、Codex 架构文档和 schemas 文档已同步。
+
 ## 目标
 
 把 `scholar-writing/references/` 从“旧 skill 中零散引用的资料目录”升级为 Codex 与 Claude Code 都能使用的正式质量规则层。

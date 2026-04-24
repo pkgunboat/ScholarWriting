@@ -28,3 +28,8 @@ def schema_path(data_type, repo_root=None):
 def default_config_path(repo_root=None):
     """Return the framework default config path."""
     return framework_root(repo_root) / "config" / "default_config.yaml"
+
+
+def reference_registry_path(repo_root=None):
+    """Return the framework reference registry path."""
+    return framework_root(repo_root) / "config" / "reference_registry.yaml"

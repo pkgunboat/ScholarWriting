@@ -118,7 +118,13 @@ def test_advance_state_low_score_review_enters_revision(tmp_path):
         "section": "摘要",
         "round": 1,
         "scores": {"logic": 70, "de_ai": 72, "completeness": 74},
-        "issues": [{"severity": "major", "message": "论证链不足"}],
+        "issues": [
+            {
+                "severity": "major",
+                "message": "论证链不足",
+                "reference_basis": [{"id": "nsfc_structure", "rule": "章节使命"}],
+            }
+        ],
     }
 
     updated = advance_state(state, config, event={"kind": "review_result", "data": review_result})
@@ -126,6 +132,7 @@ def test_advance_state_low_score_review_enters_revision(tmp_path):
     assert updated["phase"] == "section_revision"
     assert updated["sections"]["摘要"]["current_score"] < 80
     assert updated["revision"]["requires_user_confirmation"] is False
+    assert updated["revision"]["issues"][0]["reference_basis"][0]["id"] == "nsfc_structure"
     assert updated["next_action"]["action"] == "run_revision"
 
 

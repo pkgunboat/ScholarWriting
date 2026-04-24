@@ -13,6 +13,8 @@ def test_codex_repo_skill_exists_with_required_metadata():
     assert "description:" in content
     assert "uv run scholar-writing next" in content
     assert "scores.yaml" in content
+    assert "reference_inputs" in content
+    assert "quality rules" in content
 
 
 def test_codex_custom_agents_exist_with_required_fields():
@@ -31,3 +33,12 @@ def test_codex_custom_agents_exist_with_required_fields():
         assert "name =" in content
         assert "description =" in content
         assert "developer_instructions =" in content
+        assert "reference_inputs" in content
+
+
+def test_platform_prompts_require_reference_inputs():
+    prompts_dir = REPO_ROOT / "scholar_writing" / "prompts"
+    for file_name in ["architect.md", "writer.md", "reviewer.md", "revision.md"]:
+        content = (prompts_dir / file_name).read_text(encoding="utf-8")
+        assert "reference_inputs" in content
+        assert "规则" in content

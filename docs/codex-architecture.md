@@ -13,8 +13,24 @@ ScholarWriting 的 Codex 适配采用三层结构。
 - `scores.yaml` 状态读写。
 - next action 计算。
 - task pack 生成。
+- reference registry 加载与规则选择。
 - review result 事件推进。
 - CLI 入口。
+
+## Reference Registry
+
+`scholar-writing/config/reference_registry.yaml` 是写作规则资料的索引。它把 `scholar-writing/references/` 下的风格指南、国自然结构、去 AI 规则和句式模板映射到 action、agent role、项目类型和审阅维度。
+
+Controller 通过 `scholar_writing.core.references.select_references()` 为每个 task pack 生成 `reference_inputs`：
+
+```yaml
+reference_inputs:
+  required: []
+  section_specific: []
+  optional: []
+```
+
+这些 references 是质量规则。用户事实仍来自 `materials/`、`planning/`、`sections/` 和用户输入。
 
 ## Codex Adapter
 
@@ -26,7 +42,7 @@ Codex adapter 包含：
 - `.codex/agents/scholar-reviewer.toml`
 - `.codex/agents/scholar-revision.toml`
 
-Codex skill 不直接复制 Claude Code pipeline，而是先调用：
+Codex skill 先调用 controller 获取确定性动作：
 
 ```bash
 uv run scholar-writing next <project_dir> --format json
@@ -39,6 +55,8 @@ Agent handoff 使用：
 ```bash
 uv run scholar-writing taskpack <project_dir> --format json
 ```
+
+Task pack 同时携带输入、输出边界和 `reference_inputs`。Codex custom agent 在写作、审阅或修订前应先读取 `required`，再读取 `section_specific`，最后按上下文预算读取 `optional`。
 
 审阅结果等确定性事件使用 YAML event file 推进：
 

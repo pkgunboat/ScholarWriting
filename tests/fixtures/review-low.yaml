@@ -9,3 +9,6 @@ data:
   issues:
     - severity: major
       message: 论证链不足
+      reference_basis:
+        - id: nsfc_structure
+          rule: 章节使命

@@ -6,3 +6,6 @@ changes:
   - summary: 补强研究问题和技术路线之间的衔接
     reason: 回应 major 审阅意见中的论证链不足问题
     affected_sections: [摘要]
+    reference_basis:
+      - id: nsfc_structure
+        rule: 章节使命

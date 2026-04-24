@@ -22,7 +22,39 @@ properties:
     type: object
   outputs:
     type: object
+  reference_inputs:
+    type: object
+    properties:
+      required:
+        type: array
+        items:
+          $ref: "#/$defs/reference_input"
+      section_specific:
+        type: array
+        items:
+          $ref: "#/$defs/reference_input"
+      optional:
+        type: array
+        items:
+          $ref: "#/$defs/reference_input"
   requires_user_confirmation_when:
     type: array
     items:
       type: string
+$defs:
+  reference_input:
+    type: object
+    required: [id, path, reason]
+    properties:
+      id:
+        type: string
+      path:
+        type: string
+      reason:
+        type: string
+      max_extract:
+        type: [integer, "null"]
+      sections:
+        type: array
+        items:
+          type: string

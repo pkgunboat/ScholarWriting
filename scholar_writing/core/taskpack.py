@@ -1,5 +1,6 @@
 from pathlib import Path
 
+from .references import select_references
 from .workflow import next_action
 
 
@@ -47,6 +48,9 @@ def build_taskpack(project_dir, config, state):
                 "sections_dir": "sections/",
                 "scores_path": "scores.yaml",
             },
+            "review": {
+                "dimensions": ["logic", "de_ai", "completeness", "format"],
+            },
             "outputs": {
                 "reviews_dir": "reviews/",
             },
@@ -75,5 +79,14 @@ def build_taskpack(project_dir, config, state):
             "inputs": {},
             "outputs": {},
         })
+
+    base["reference_inputs"] = select_references(
+        project_type=config.get("project", {}).get("type", "nsfc"),
+        action=kind,
+        agent_role=base["agent_role"],
+        target_section=base.get("section", {}).get("id"),
+        review_dimensions=base.get("review", {}).get("dimensions"),
+        language=config.get("project", {}).get("language", "zh"),
+    )
 
     return base

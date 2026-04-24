@@ -1,0 +1,55 @@
+# Reference registry schema used by the deterministic controller.
+type: object
+required: [version, references, section_patterns]
+properties:
+  version:
+    type: integer
+    minimum: 1
+  references:
+    type: object
+    minProperties: 1
+    additionalProperties:
+      type: object
+      required: [path, purpose, applies_to]
+      properties:
+        path:
+          type: string
+        purpose:
+          type: string
+        category:
+          type: string
+        applies_to:
+          type: object
+          required: [project_types, agent_roles, actions]
+          properties:
+            project_types:
+              type: array
+              minItems: 1
+              items:
+                type: string
+                enum: [nsfc, paper]
+            languages:
+              type: array
+              items:
+                type: string
+            agent_roles:
+              type: array
+              minItems: 1
+              items:
+                type: string
+                enum: [architect, writer, reviewer, revision, main]
+            actions:
+              type: array
+              minItems: 1
+              items:
+                type: string
+            review_dimensions:
+              type: array
+              items:
+                type: string
+  section_patterns:
+    type: object
+    additionalProperties:
+      type: object
+      additionalProperties:
+        type: string
