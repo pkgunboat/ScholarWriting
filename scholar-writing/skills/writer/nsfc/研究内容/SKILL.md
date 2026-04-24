@@ -112,7 +112,7 @@ allowed-tools: [Read, Write]
 
 ## 输出
 
-将完成的章节写入 `sections/02_研究内容.md`
+将完成的章节写入 `sections/03_研究内容.md`
 
 ## 约束
 

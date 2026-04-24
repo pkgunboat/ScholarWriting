@@ -16,13 +16,15 @@ validate.py 的测试套件。
 
 import json
 import os
+import shutil
+from pathlib import Path
 import subprocess
 import sys
 import tempfile
 
 # 项目根目录和脚本路径
-PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-VALIDATE_SCRIPT = os.path.join(PROJECT_ROOT, 'scholar-writing', 'scripts', 'validate.py')
+PROJECT_ROOT = Path(__file__).resolve().parents[1]
+VALIDATE_SCRIPT = PROJECT_ROOT / 'scholar-writing' / 'scripts' / 'validate.py'
 
 
 def run_validate(data_type, file_path, extra_args=None):
@@ -37,7 +39,7 @@ def run_validate(data_type, file_path, extra_args=None):
     输出返回值：
       tuple(dict, int) - (JSON 结果字典, 退出码)
     """
-    cmd = [sys.executable, VALIDATE_SCRIPT, data_type, file_path, '--format', 'json']
+    cmd = [sys.executable, str(VALIDATE_SCRIPT), data_type, file_path, '--format', 'json']
     if extra_args:
         cmd.extend(extra_args)
     proc = subprocess.run(cmd, capture_output=True, text=True, cwd=PROJECT_ROOT)
@@ -536,6 +538,60 @@ last_updated: "2024-01-01"
         assert code == 0
     finally:
         os.unlink(path)
+
+
+# ======================== All 模式测试 ========================
+
+def test_validate_all_discovers_project_root_config_and_scores():
+    """测试 all 模式发现项目根目录的 config.yaml 和 scores.yaml"""
+    project_dir = tempfile.mkdtemp(prefix='test_validate_all_')
+    try:
+        with open(os.path.join(project_dir, 'config.yaml'), 'w', encoding='utf-8') as f:
+            f.write("""
+project:
+  type: nsfc
+  template: 面上项目
+  input_mode: auto
+  language: zh
+convergence:
+  section_score_threshold: 80
+  global_score_threshold: 85
+  max_major_issues: 2
+  max_section_rounds: 3
+  max_global_rounds: 5
+score_weights:
+  section:
+    logic: 0.40
+    de_ai: 0.25
+    completeness: 0.35
+  global:
+    consistency: 0.30
+    narrative: 0.35
+    feasibility: 0.20
+    format: 0.15
+checklist_weight_map:
+  critical: 3
+  high: 2
+  medium: 1
+critical_threshold: 60
+""")
+        with open(os.path.join(project_dir, 'scores.yaml'), 'w', encoding='utf-8') as f:
+            f.write("""
+phase: init
+global_round: 0
+sections:
+  摘要:
+    status: pending
+    current_round: 0
+""")
+
+        result, code = run_validate('all', project_dir)
+        validated_types = {item['type'] for item in result}
+
+        assert code == 0, f"应通过 all 校验，实际: {result}"
+        assert {'config', 'scores'}.issubset(validated_types)
+    finally:
+        shutil.rmtree(project_dir)
 
 
 # ======================== 测试运行器 ========================

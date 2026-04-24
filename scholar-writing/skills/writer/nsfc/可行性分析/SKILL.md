@@ -97,7 +97,7 @@ allowed-tools: [Read, Write]
 
 ## 输出
 
-将完成的章节写入 `sections/04_可行性分析.md`
+将完成的章节写入 `sections/05_可行性分析.md`
 
 ## 约束
 

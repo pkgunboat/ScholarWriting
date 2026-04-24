@@ -13,7 +13,7 @@ properties:
         type: string
       input_mode:
         type: string
-        enum: [from_materials, from_outline, from_draft]
+        enum: [auto, from_materials, from_outline, from_draft]
       language:
         type: string
         enum: [zh, en]

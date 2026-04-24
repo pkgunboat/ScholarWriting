@@ -4,12 +4,46 @@ required: [phase, global_round, sections]
 properties:
   phase:
     type: string
-    enum: [init, section_writing, section_review, revision, global_review, human_needed, completed]
+    enum:
+      - init
+      - initialized
+      - planning_required
+      - planning_review
+      - section_writing
+      - section_review
+      - section_reviewing
+      - revision
+      - section_revision
+      - global_review
+      - global_reviewing
+      - global_revision
+      - human_needed
+      - blocked
+      - complete
+      - completed
   global_round:
     type: integer
     minimum: 0
   force_full_recheck:
     type: boolean
+  summary:
+    type: string
+  notes:
+    type: [string, "null"]
+  last_action:
+    type: [string, "null"]
+  next_action:
+    type: [object, "null"]
+    properties:
+      action:
+        type: string
+        enum: [ask_user, run_architect, run_writer, run_reviewers, run_revision, run_validation, advance_state, stop_complete, stop_blocked]
+      input_mode:
+        type: [string, "null"]
+      reason:
+        type: [string, "null"]
+  blocked_reason:
+    type: [string, "null"]
   sections:
     type: object
     additionalProperties:
@@ -31,11 +65,69 @@ properties:
         inner_scores:
           type: array
           items:
-            type: number
+            oneOf:
+              - type: number
+              - type: object
+                required: [round, weighted]
+                properties:
+                  round:
+                    type: integer
+                    minimum: 1
+                  logic:
+                    type: number
+                    minimum: 0
+                    maximum: 100
+                  de_ai:
+                    type: number
+                    minimum: 0
+                    maximum: 100
+                  completeness:
+                    type: number
+                    minimum: 0
+                    maximum: 100
+                  weighted:
+                    type: number
+                    minimum: 0
+                    maximum: 100
+                  flagged:
+                    type: array
+                    items:
+                      type: string
         outer_scores:
           type: array
           items:
-            type: number
+            oneOf:
+              - type: number
+              - type: object
+                required: [round, weighted]
+                properties:
+                  round:
+                    type: integer
+                    minimum: 1
+                  consistency:
+                    type: number
+                    minimum: 0
+                    maximum: 100
+                  narrative:
+                    type: number
+                    minimum: 0
+                    maximum: 100
+                  feasibility:
+                    type: number
+                    minimum: 0
+                    maximum: 100
+                  format:
+                    type: number
+                    minimum: 0
+                    maximum: 100
+                  weighted:
+                    type: number
+                    minimum: 0
+                    maximum: 100
+                  flagged:
+                    type: array
+                    items:
+                      type: string
         last_reviewer_scores:
           type: object
         reviewer_feedback:

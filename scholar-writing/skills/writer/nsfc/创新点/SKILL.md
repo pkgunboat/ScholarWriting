@@ -110,7 +110,7 @@ allowed-tools: [Read, Write]
 
 ## 输出
 
-将完成的章节写入 `sections/05_创新点.md`
+将完成的章节写入 `sections/06_创新点.md`
 
 ## 约束
 

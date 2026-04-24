@@ -1,0 +1,11 @@
+kind: review_result
+data:
+  section: 摘要
+  round: 1
+  scores:
+    logic: 70
+    de_ai: 72
+    completeness: 74
+  issues:
+    - severity: major
+      message: 论证链不足

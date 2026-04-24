@@ -1,1 +1,4 @@
+# Legacy script-only requirements. The primary project environment is managed
+# by the repository-level pyproject.toml with uv.
+jsonschema>=4.0
 pyyaml>=6.0

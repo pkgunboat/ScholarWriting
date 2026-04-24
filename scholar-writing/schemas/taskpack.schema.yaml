@@ -1,0 +1,28 @@
+# Codex/Claude adapter task pack schema
+type: object
+required: [task_id, action, agent_role, project_dir, inputs, outputs]
+properties:
+  task_id:
+    type: string
+    minLength: 3
+  action:
+    type: string
+    enum: [ask_user, run_architect, run_writer, run_reviewers, run_revision, run_validation, advance_state, stop_complete, stop_blocked]
+  agent_role:
+    type: string
+    enum: [main, architect, writer, reviewer, revision]
+  project_dir:
+    type: string
+  input_mode:
+    type: [string, "null"]
+    enum: [from_materials, from_outline, from_draft, needs_user_input, null]
+  reason:
+    type: [string, "null"]
+  inputs:
+    type: object
+  outputs:
+    type: object
+  requires_user_confirmation_when:
+    type: array
+    items:
+      type: string

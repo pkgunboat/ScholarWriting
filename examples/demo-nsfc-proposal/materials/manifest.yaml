@@ -2,17 +2,20 @@
 # 实际使用时，将你的研究材料放入 materials/ 目录，并在此文件中登记
 
 materials:
-  - file: "前期成果_多模态感知综述.md"
+  - path: "materials/前期成果_多模态感知综述.md"
     type: paper
     description: "申请人发表的多模态感知领域综述论文"
-    relevance: [立项依据, 研究基础]
+    sections: [立项依据, 研究基础]
+    key_content: "多模态感知领域的研究现状、主要挑战和申请人前期成果"
 
-  - file: "实验结果_交互系统评测.md"
-    type: experiment
+  - path: "materials/实验结果_交互系统评测.md"
+    type: data
     description: "前期实验中交互系统的用户评测数据"
-    relevance: [研究基础, 可行性分析]
+    sections: [研究基础, 可行性分析]
+    key_content: "交互系统用户评测指标、实验条件和初步效果"
 
-  - file: "研究构想_技术路线草稿.md"
+  - path: "materials/研究构想_技术路线草稿.md"
     type: note
     description: "申请人对技术路线的初步构想"
-    relevance: [研究内容, 研究方案]
+    sections: [研究内容, 研究方案]
+    key_content: "多模态融合、动态注意力和低延迟交互决策的初步方案"

@@ -1,0 +1,9 @@
+kind: review_result
+data:
+  section: 摘要
+  round: 2
+  scores:
+    logic: 86
+    de_ai: 82
+    completeness: 88
+  issues: []

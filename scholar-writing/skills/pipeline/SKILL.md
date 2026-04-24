@@ -10,6 +10,16 @@ allowed-tools: [Read, Write, Edit, Bash, Agent]
 
 # Scholar Pipeline — 学术写作全流程编排器
 
+> Legacy adapter note: this file is the Claude Code adapter for the original
+> pipeline and intentionally uses Claude Code concepts such as `allowed-tools`
+> and `Agent(...)` style delegation. Codex should not use this file as its
+> workflow entrypoint. For Codex, use `.agents/skills/scholar-writing/SKILL.md`
+> and the deterministic CLI: `uv run scholar-writing next <project_dir>`.
+
+> Shared core note: new platform-neutral behavior belongs in `scholar_writing/`
+> and repository schemas/tests. Keep this legacy adapter aligned with the
+> shared core instead of adding new state-machine logic here.
+
 ## Section 0: 交互式项目初始化
 
 当用户触发 Pipeline 时（如输入"写申报书"、"帮我写国自然"等），首先检查项目状态，

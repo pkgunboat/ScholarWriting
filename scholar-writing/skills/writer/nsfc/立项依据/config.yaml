@@ -17,13 +17,13 @@ parameters:
       required: true
   outputs:
     - name: section
-      path: "sections/01_立项依据.md"
+      path: "sections/02_立项依据.md"
 
 guardrails:
   allowed_write_files:
-    - "sections/01_立项依据.md"
+    - "sections/02_立项依据.md"
   forbidden_write_files:
-    - "sections/02_*.md"
+    - "sections/01_*.md"
     - "sections/03_*.md"
     - "planning/**"
     - "config/**"

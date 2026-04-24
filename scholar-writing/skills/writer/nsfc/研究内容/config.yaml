@@ -10,20 +10,21 @@ parameters:
       path: "planning/outline.md"
       required: true
     - name: justification
-      path: "sections/01_立项依据.md"
+      path: "sections/02_立项依据.md"
       required: true
     - name: claim_registry
       path: "planning/claim_registry.md"
       required: true
   outputs:
     - name: section
-      path: "sections/02_研究内容.md"
+      path: "sections/03_研究内容.md"
 
 guardrails:
   allowed_write_files:
-    - "sections/02_研究内容.md"
+    - "sections/03_研究内容.md"
   forbidden_write_files:
     - "sections/01_*.md"
+    - "sections/02_*.md"
     - "planning/**"
   read_only: false
 

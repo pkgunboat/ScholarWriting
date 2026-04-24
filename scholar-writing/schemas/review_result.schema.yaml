@@ -1,0 +1,38 @@
+# Machine-readable reviewer event schema consumed by `scholar-writing advance --event-file`.
+type: object
+required: [kind, data]
+properties:
+  kind:
+    type: string
+    enum: [review_result]
+  data:
+    type: object
+    required: [section, round, scores, issues]
+    properties:
+      section:
+        type: string
+      round:
+        type: integer
+        minimum: 1
+      scores:
+        type: object
+        minProperties: 1
+        additionalProperties:
+          type: number
+          minimum: 0
+          maximum: 100
+      issues:
+        type: array
+        items:
+          type: object
+          required: [severity, message]
+          properties:
+            severity:
+              type: string
+              enum: [critical, major, minor]
+            message:
+              type: string
+            affected_sections:
+              type: array
+              items:
+                type: string

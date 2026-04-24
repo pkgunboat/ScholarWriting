@@ -44,8 +44,8 @@ MARKDOWN_TYPES = {'outline', 'claim_registry', 'review_report'}
 
 # all 模式下的文件发现规则
 FILE_DISCOVERY = {
-    'config': 'config/default_config.yaml',
-    'scores': 'state/scores.yaml',
+    'config': ['config.yaml', 'config/default_config.yaml'],
+    'scores': ['scores.yaml', 'state/scores.yaml'],
     'dependency_graph': 'planning/dependency_graph.yaml',
     'manifest': 'materials/manifest.yaml',
     'outline': 'planning/outline.md',
@@ -396,6 +396,28 @@ SEMANTIC_VALIDATORS = {
 }
 
 
+def iter_discovery_paths(project_root, rel_paths):
+    """
+    返回 all 模式下某类文件的候选路径。
+
+    rel_paths 可以是单一路径，也可以是按优先级排列的路径列表。
+    """
+    if isinstance(rel_paths, str):
+        rel_paths = [rel_paths]
+    for rel_path in rel_paths:
+        yield Path(project_root) / rel_path
+
+
+def first_existing_discovery_path(project_root, rel_paths):
+    """
+    返回第一个存在的候选路径。
+    """
+    for path in iter_discovery_paths(project_root, rel_paths):
+        if path.exists():
+            return path
+    return None
+
+
 def validate_markdown_body(body, data_type, result, project_type=None):
     """
     使用 markdown_rules.yaml 中的正则规则校验 Markdown 正文。
@@ -542,10 +564,10 @@ def validate_all(project_root):
     results = []
 
     # 读取 config 获取 project_type 和 input_mode
-    config_path = project_root / FILE_DISCOVERY['config']
+    config_path = first_existing_discovery_path(project_root, FILE_DISCOVERY['config'])
     project_type = None
     config_data = None
-    if config_path.exists():
+    if config_path:
         try:
             with open(config_path, 'r', encoding='utf-8') as f:
                 config_data = yaml.safe_load(f)
@@ -555,8 +577,8 @@ def validate_all(project_root):
 
     # 逐类型校验
     for dtype, rel_path in FILE_DISCOVERY.items():
-        fpath = project_root / rel_path
-        if fpath.exists():
+        fpath = first_existing_discovery_path(project_root, rel_path)
+        if fpath:
             kwargs = {}
             if dtype == 'manifest':
                 kwargs['base_dir'] = str(project_root)

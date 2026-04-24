@@ -1,15 +1,27 @@
-# 示例：从大纲开始 (from_outline)
-# 适用场景：已有明确的写作思路和章节规划，跳过素材分析阶段
-#
-# 使用方法：
-#   1. 编写 planning/outline.md（各章节核心论点和预期内容）
-#   2. 在 Claude Code 中运行：写申报书
-#
-# 系统流程：跳过 Architect → 自动生成依赖图 → 逐章写作 → 审阅 → 修订
-
 project:
-  name: "面向复杂场景的视觉语言模型鲁棒性研究"
+  name: "from_outline smoke"
   type: nsfc
   template: 面上项目
-  input_mode: auto    # 自动检测到 planning/outline.md → from_outline
+  input_mode: auto
   language: zh
+convergence:
+  section_score_threshold: 80
+  global_score_threshold: 85
+  max_major_issues: 2
+  max_section_rounds: 3
+  max_global_rounds: 5
+score_weights:
+  section:
+    logic: 0.40
+    de_ai: 0.25
+    completeness: 0.35
+  global:
+    consistency: 0.30
+    narrative: 0.35
+    feasibility: 0.20
+    format: 0.15
+checklist_weight_map:
+  critical: 3
+  high: 2
+  medium: 1
+critical_threshold: 60

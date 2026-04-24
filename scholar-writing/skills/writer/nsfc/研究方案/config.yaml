@@ -7,24 +7,25 @@ skill_info:
 parameters:
   inputs:
     - name: research_content
-      path: "sections/02_研究内容.md"
+      path: "sections/03_研究内容.md"
       required: true
     - name: claim_registry
       path: "planning/claim_registry.md"
       required: true
   outputs:
     - name: section
-      path: "sections/03_研究方案.md"
+      path: "sections/04_研究方案.md"
     - name: roadmap
       path: "figures/technical_roadmap.mmd"
 
 guardrails:
   allowed_write_files:
-    - "sections/03_研究方案.md"
+    - "sections/04_研究方案.md"
     - "figures/technical_roadmap.mmd"
   forbidden_write_files:
     - "sections/01_*.md"
     - "sections/02_*.md"
+    - "sections/03_*.md"
     - "planning/**"
   read_only: false
 

@@ -1,0 +1,29 @@
+# revisions/*.yaml change log schema
+type: object
+required: [section, round, changes, risk_level]
+properties:
+  section:
+    type: string
+  round:
+    type: integer
+    minimum: 1
+  risk_level:
+    type: string
+    enum: [minor, major, critical]
+  changes:
+    type: array
+    minItems: 1
+    items:
+      type: object
+      required: [summary, reason]
+      properties:
+        summary:
+          type: string
+        reason:
+          type: string
+        affected_sections:
+          type: array
+          items:
+            type: string
+  requires_user_confirmation:
+    type: boolean

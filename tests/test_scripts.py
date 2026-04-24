@@ -1,12 +1,17 @@
 #!/usr/bin/env python3
 """辅助脚本测试套件。"""
-import subprocess, json, tempfile, os, shutil
+from pathlib import Path
+import subprocess, json, tempfile, os, shutil, sys
+
+
+PROJECT_ROOT = Path(__file__).resolve().parents[1]
+SCRIPTS_DIR = PROJECT_ROOT / 'scholar-writing' / 'scripts'
 
 def run_script(script, *args):
     """运行脚本并返回解析后的 JSON 输出。"""
     result = subprocess.run(
-        ['python3', f'scholar-writing/scripts/{script}'] + list(args),
-        capture_output=True, text=True, cwd='/Users/zedongyu/code/project/ScholarWriting'
+        [sys.executable, str(SCRIPTS_DIR / script)] + list(args),
+        capture_output=True, text=True, cwd=PROJECT_ROOT
     )
     return json.loads(result.stdout), result.returncode
 

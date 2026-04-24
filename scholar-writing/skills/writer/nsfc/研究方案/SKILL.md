@@ -114,7 +114,7 @@ allowed-tools: [Read, Write]
 
 ## 输出
 
-将完成的章节写入 `sections/03_研究方案.md`
+将完成的章节写入 `sections/04_研究方案.md`
 
 如果生成了技术路线图描述，同时输出 `figures/technical_roadmap.mmd`（Mermaid格式）。
 

@@ -14,18 +14,18 @@ parameters:
       required: true
   outputs:
     - name: section
-      path: "sections/07_摘要.md"
+      path: "sections/01_摘要.md"
 
 guardrails:
   allowed_write_files:
-    - "sections/07_摘要.md"
+    - "sections/01_摘要.md"
   forbidden_write_files:
-    - "sections/01_*.md"
     - "sections/02_*.md"
     - "sections/03_*.md"
     - "sections/04_*.md"
     - "sections/05_*.md"
     - "sections/06_*.md"
+    - "sections/07_*.md"
     - "planning/**"
   read_only: false
 

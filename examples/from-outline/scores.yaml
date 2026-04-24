@@ -1,0 +1,10 @@
+phase: initialized
+global_round: 0
+summary: "from_outline 示例，等待 writer 写作。"
+last_action: null
+next_action: null
+blocked_reason: null
+sections:
+  摘要:
+    status: pending
+    current_round: 0

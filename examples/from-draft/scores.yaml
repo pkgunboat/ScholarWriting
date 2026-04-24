@@ -1,0 +1,12 @@
+phase: initialized
+global_round: 0
+summary: "from_draft 示例，等待 reviewer 审阅。"
+last_action: null
+next_action: null
+blocked_reason: null
+sections:
+  摘要:
+    status: pending
+    current_round: 0
+    inner_scores: []
+    outer_scores: []
