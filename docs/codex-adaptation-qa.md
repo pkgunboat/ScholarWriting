@@ -2,6 +2,8 @@
 
 本文档用于记录 ScholarWriting 从 Claude Code 设计迁移到 Codex App 使用时的方向讨论。它不是最终实施计划，而是把存疑项通过问答方式收敛为可执行判断。
 
+后续实现已进一步明确：`.agents/skills/` 是多个 agent 框架都可能发现的 repo-local skill 位置，不应写成 Codex 专属说明；Codex 专属内容应放在 `.codex/agents/`、安装脚本生成的 Codex skill，或明确标注为 Codex adapter 的文档中。
+
 ## 背景
 
 当前 review 已确认的核心问题：
@@ -29,14 +31,14 @@
 **问题：** 在第一阶段，我们应该把目标定位成哪一种？
 
 - A. Codex App 可安装插件：优先让用户能“安装后触发”，即使自动循环先做最小闭环。
-- B. Repo 内 Codex workflow：优先在当前仓库开发/运行，通过 `.agents/skills` 和 `.codex/agents` 验证流程，暂不强调插件分发。
+- B. Repo 内工作流：优先在当前仓库开发/运行，通过平台通用 `.agents/skills` 和 Codex 专用 `.codex/agents` 验证流程，暂不强调插件分发。
 - C. 双轨兼容：同时保留 Claude Code 原入口，并新增 Codex plugin/repo workflow，但第一阶段工作量更大。
 
 **用户回答：** B. Repo 内 Codex workflow。
 
-**当前判断：** 第一阶段优先在当前仓库中跑通 Codex 原生工作流，不先追求插件化安装。改造重点应放在 `.agents/skills`、`.codex/agents`、项目内状态机、示例和测试闭环上。`.codex-plugin/plugin.json` 可作为第二阶段分发能力，不作为第一阶段阻塞项。
+**当前判断：** 第一阶段优先在当前仓库中跑通工作流，不先追求插件化安装。`.agents/skills` 承担平台通用 repo-local skill 入口，`.codex/agents` 承担 Codex 专用 agent 配置；项目内状态机、示例和测试闭环仍是核心改造重点。`.codex-plugin/plugin.json` 可作为第二阶段分发能力，不作为第一阶段阻塞项。
 
-**影响范围：** 第一阶段优先新增 repo-local Codex 入口；文档重点改为“在仓库中启用和验证 Codex workflow”；测试以当前 worktree 可运行作为验收；插件分发暂缓。
+**影响范围：** 第一阶段优先新增平台通用 repo-local skill 和 Codex custom agents；文档需要区分通用 skill、Codex adapter 和 Claude Code legacy adapter；测试以当前 worktree 可运行作为验收；插件分发暂缓。
 
 **状态：** 已确认。
 

@@ -1,6 +1,6 @@
 # Codex 使用指南
 
-推荐使用路径是先把 ScholarWriting 安装到本机 Codex，再用 Codex 打开自己的写作项目。
+推荐使用路径是先把“学术写作助手”安装到本机 Codex，再用 Codex 打开自己的写作项目。`scholar-writing` 是机器 ID、CLI 命令和安装目录名。
 
 ## 一键安装
 
@@ -42,7 +42,7 @@ ${CODEX_HOME:-$HOME/.codex}/agents/scholar-*.toml
 在 Codex 里说：
 
 ```text
-帮我卸载 scholar writing
+帮我卸载学术写作助手
 ```
 
 或：
@@ -75,17 +75,17 @@ my-proposal/
 用 Codex 打开这个目录，然后输入：
 
 ```text
-使用 scholar-writing 继续处理 ./my-proposal。
+使用学术写作助手继续处理 ./my-proposal。
 ```
 
 常见触发方式：
 
 ```text
-使用 scholar-writing 基于 ./my-proposal/materials 生成申报书大纲，并继续写作。
+使用学术写作助手基于 ./my-proposal/materials 生成申报书大纲，并继续写作。
 ```
 
 ```text
-使用 scholar-writing 审阅并优化 ./my-proposal/sections 里的初稿。
+使用学术写作助手审阅并优化 ./my-proposal/sections 里的初稿。
 ```
 
 Codex 会调用已安装的 `scholar-writing` skill。controller 和 references 来自安装 runtime，用户项目只保存自己的材料和写作产物。
@@ -132,10 +132,10 @@ uv run scholar-writing advance examples/from-draft --format json
 在 Codex 中输入：
 
 ```text
-使用 scholar-writing 审阅优化 examples/from-draft。
+使用学术写作助手审阅优化 examples/from-draft。
 ```
 
-这会走源码仓库内的 repo-local skill 和 `.codex/agents`，适合调试 agent 文案、taskpack、reference_inputs 和状态推进。
+这会走源码仓库内的平台通用 repo-local skill；在 Codex 中还会配合 `.codex/agents`，适合调试 agent 文案、taskpack、reference_inputs 和状态推进。
 
 ## 使用临时 Codex Home 调试安装器
 
@@ -152,7 +152,7 @@ CODEX_HOME=.codex-dev-home bash scripts/uninstall-codex.sh
 可以直接要求：
 
 ```text
-使用 scholar-writing 审阅优化 ./my-proposal。
+使用学术写作助手审阅优化 ./my-proposal。
 ```
 
 Codex 应读取已安装的 `scholar-writing` skill，先运行 controller 获取 next action，再按需使用安装的 4 类 custom agents。

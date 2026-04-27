@@ -102,29 +102,31 @@ fi
 cat > "$install_dir/SKILL.md" <<'EOF'
 ---
 name: scholar-writing
-description: Multi-agent academic writing workflow for NSFC proposals, papers, draft review, and write-review-revision optimization loops.
+description: 学术写作助手，面向国自然申报书、论文、初稿审阅和“写作-审阅-修订”循环优化。
 ---
 
-# ScholarWriting for Codex
+# 学术写作助手（Codex 安装版）
 
-Use this skill when the user asks for academic writing, NSFC/国自然 proposals, proposal drafting, paper drafting, draft review, or iterative writing optimization.
+本 skill 的机器 ID 是 `scholar-writing`。面向中文用户时，优先称为“学术写作助手”。
 
-## Installed Runtime
+当用户要求进行学术写作、国自然/NSFC 申报书写作、论文起草、初稿审阅或迭代优化时，使用本 skill。
 
-This skill is installed with a runtime directory next to this file:
+## 已安装 Runtime
+
+安装目录中包含与本文件并列的 runtime：
 
 ```text
 runtime/
 bin/scholar-writing
 ```
 
-Use `bin/scholar-writing` for controller commands. The wrapper sets `SCHOLAR_WRITING_RUNTIME` so the controller can find schemas, references, prompts, and templates while the current working directory remains the user's writing project.
+执行 controller 命令时使用 `bin/scholar-writing`。该 wrapper 会设置 `SCHOLAR_WRITING_RUNTIME`，让 controller 在当前工作目录仍为用户写作项目的情况下找到 schemas、references、prompts 和 templates。
 
-## User Workflow
+## 用户工作流
 
-Users normally work in their own project directory, not inside the ScholarWriting source repository.
+用户通常应在自己的写作项目目录中工作，不需要进入 ScholarWriting 源码仓库。
 
-Expected project layout:
+推荐项目结构：
 
 ```text
 my-proposal/
@@ -135,31 +137,31 @@ my-proposal/
 └── revisions/
 ```
 
-If the user has no project skeleton, create one:
+如果用户还没有项目骨架，先创建：
 
 ```bash
 ${CODEX_HOME:-$HOME/.codex}/skills/scholar-writing/bin/scholar-writing init my-proposal --type nsfc --mode auto
 ```
 
-Then run:
+然后执行：
 
 ```bash
 ${CODEX_HOME:-$HOME/.codex}/skills/scholar-writing/bin/scholar-writing next my-proposal --format json
 ${CODEX_HOME:-$HOME/.codex}/skills/scholar-writing/bin/scholar-writing taskpack my-proposal --format json
 ```
 
-Follow the returned action and taskpack. Treat `taskpack.reference_inputs` as quality rules from the installed runtime's `scholar-writing/references/` directory.
+按返回的 action 和 taskpack 推进。`taskpack.reference_inputs` 是安装版 runtime 中 `scholar-writing/references/` 提供的质量规则。
 
-## Agent Usage
+## Agent 使用
 
-Use installed custom agents when available:
+当前 Codex 环境中如果能发现以下 custom agents，优先使用：
 
 - `scholar-architect`
 - `scholar-writer`
 - `scholar-reviewer`
 - `scholar-revision`
 
-Keep write boundaries from the taskpack. Critical issues, core-claim changes, large-scope restructuring, key fact changes, or broad cross-section impact require user confirmation.
+必须遵守 taskpack 的写入边界。涉及 critical 问题、核心论点变化、大范围重构、关键事实变更或跨章节广泛影响时，先向用户确认。
 EOF
 
 cat > "$install_dir/bin/scholar-writing" <<'EOF'

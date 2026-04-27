@@ -35,6 +35,7 @@ def test_codex_install_and_uninstall_roundtrip(tmp_path):
     assert not (runtime_dir / ".git").exists()
     assert not (runtime_dir / ".venv").exists()
     assert (codex_home / "agents" / "scholar-writer.toml").exists()
+    assert "学术写作助手" in (skill_dir / "SKILL.md").read_text(encoding="utf-8")
 
     uninstall = run_script("uninstall-codex.sh", codex_home)
 
@@ -98,6 +99,7 @@ def test_repository_exposes_codex_install_skill_entrypoint():
     assert "scripts/uninstall-codex.sh" in content
     assert "仓库地址" in content
     assert "本机仓库路径" in content
+    assert "学术写作助手" in content
     assert "scholar writing" in content
 
 

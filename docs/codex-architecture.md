@@ -36,11 +36,12 @@ reference_inputs:
 
 这些 references 是质量规则。用户事实仍来自 `materials/`、`planning/`、`sections/` 和用户输入。
 
-## Codex Adapter
+## Repo-local Skill 与 Codex Adapter
+
+源码仓库中的 `.agents/skills/scholar-writing/SKILL.md` 是平台通用 repo-local skill。Codex、Claude Code、opencode 等能发现 `.agents/skills` 的框架都可能读取它，因此这里不应写成 Codex 专属工作流。
 
 源码仓库中的 Codex adapter 包含：
 
-- `.agents/skills/scholar-writing/SKILL.md`
 - `.codex/agents/scholar-architect.toml`
 - `.codex/agents/scholar-writer.toml`
 - `.codex/agents/scholar-reviewer.toml`

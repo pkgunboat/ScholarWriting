@@ -11,11 +11,13 @@ def test_codex_repo_skill_exists_with_required_metadata():
     assert skill_path.exists()
     assert "name: scholar-writing" in content
     assert "description:" in content
+    assert "学术写作助手" in content
     assert "uv run scholar-writing next" in content
     assert "scores.yaml" in content
     assert "reference_inputs" in content
-    assert "quality rules" in content
-    assert "Developer Debugging" in content
+    assert "质量规则" in content
+    assert "开发者调试" in content
+    assert "平台中性" in content
     assert ".codex/agents" in content
     assert "examples/from-draft" in content
 
@@ -44,7 +46,10 @@ def test_developer_debugging_docs_cover_repo_local_workflow():
     codex_doc = (REPO_ROOT / "docs" / "codex-getting-started.md").read_text(encoding="utf-8")
 
     assert "源码仓库内调试" in readme
+    assert "学术写作助手" in readme
     assert "repo-local skill" in readme
+    assert "平台通用 repo-local skill" in readme
+    assert "学术写作助手" in codex_doc
     assert "临时 Codex Home" in codex_doc
     assert "CODEX_HOME=" in codex_doc
 

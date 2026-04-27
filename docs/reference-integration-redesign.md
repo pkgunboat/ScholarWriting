@@ -2,11 +2,11 @@
 
 ## 实施状态
 
-已落地到当前 Codex workflow：
+已落地到当前写作 workflow：
 
 - 已新增 reference registry 和 schema。
 - `taskpack` 已输出 `reference_inputs`。
-- Codex skill、custom agents 和平台无关 prompts 已要求读取 `reference_inputs`。
+- repo-local skill、Codex custom agents 和平台无关 prompts 已要求读取 `reference_inputs`。
 - `review_result` 与 `revision_log` 已支持 `reference_basis`。
 - README、Codex 使用文档、Codex 架构文档和 schemas 文档已同步。
 
@@ -302,22 +302,22 @@ reference_input:
 规划产物应体现章节使命、核心论点、科学问题、研究内容和评审关注点之间的对应关系。
 ```
 
-### 5. Codex Skill 更新
+### 5. Repo-local Skill 更新
 
 `.agents/skills/scholar-writing/SKILL.md` 需要明确：
 
 - `taskpack` 是 agent handoff 的事实源。
 - `reference_inputs` 是质量规则输入。
-- Codex agent 调用前必须读取 taskpack 中列出的 references。
+- agent 调用前必须读取 taskpack 中列出的 references。
 - agent 不应自行遍历整个 `references/`。
 - 遇到上下文过大时，优先读取 `required`，再读 `section_specific`，最后读 `optional`。
 
 建议加入操作规则：
 
 ```markdown
-Before invoking a custom agent, inspect `reference_inputs` in the task pack.
-Pass the referenced files as quality rules, not as user-provided evidence.
-Do not load all files under `scholar-writing/references/` unless explicitly requested.
+调用 agent 前，先检查 taskpack 中的 `reference_inputs`。
+把这些引用文件作为质量规则传递，不要当作用户提供的事实证据。
+除非用户明确要求完整规则审计，不要遍历读取 `scholar-writing/references/` 下的全部文件。
 ```
 
 ### 6. Codex Agent 配置更新
@@ -442,9 +442,9 @@ tests/test_review_result_references.py
 - `examples/from-outline` 的 taskpack 包含 writer 所需 style、sentence patterns 和 NSFC structure。
 - `examples/from-draft` 的 taskpack 包含 reviewer 所需 style、de-AI 或结构规则。
 
-### Phase 3：让 prompts 和 Codex adapter 消费 references
+### Phase 3：让 prompts、repo-local skill 和 Codex adapter 消费 references
 
-**目标：** Codex agent 明确把 references 当作质量规则。
+**目标：** agent 明确把 references 当作质量规则。
 
 **修改文件：**
 
@@ -461,9 +461,9 @@ tests/test_review_result_references.py
 
 **验收条件：**
 
-- Codex skill 明确要求读取 taskpack 的 `reference_inputs`。
+- repo-local skill 明确要求读取 taskpack 的 `reference_inputs`。
 - writer/reviewer/revision/architect prompt 都说明 references 的使用方式。
-- 测试能检查 Codex adapter 文案中存在 `reference_inputs` 契约。
+- 测试能检查 repo-local skill 和 Codex adapter 文案中存在 `reference_inputs` 契约。
 
 ### Phase 4：扩展审阅与修订事件 schema
 
@@ -504,7 +504,7 @@ tests/test_review_result_references.py
 ## 建议实现顺序
 
 1. 先做 Phase 1 和 Phase 2，让 taskpack 真实携带 `reference_inputs`。
-2. 再做 Phase 3，让 Codex skill 和 agents 按 taskpack 使用 references。
+2. 再做 Phase 3，让 repo-local skill 和 agents 按 taskpack 使用 references。
 3. 然后做 Phase 4，把审阅与修订的规则来源记录进事件。
 4. 最后做 Phase 5，同步 README 和架构文档。
 
