@@ -97,17 +97,8 @@ def test_install_replaces_previous_skill_payload_when_explicitly_allowed(tmp_pat
     assert not stale_file.exists()
 
 
-def test_repository_exposes_codex_install_skill_entrypoint():
-    skill_path = REPO_ROOT / "SKILL.md"
-    content = skill_path.read_text(encoding="utf-8")
-
-    assert "name: scholar-writing" in content
-    assert "scripts/install-codex.sh" in content
-    assert "scripts/uninstall-codex.sh" in content
-    assert "仓库地址" in content
-    assert "本机仓库路径" in content
-    assert "学术写作助手" in content
-    assert "scholar writing" in content
+def test_repository_does_not_expose_install_shim_as_root_skill():
+    assert not (REPO_ROOT / "SKILL.md").exists()
 
 
 def test_install_can_finalize_generic_skill_install_location(tmp_path):

@@ -16,7 +16,7 @@
 帮我安装本机这个仓库：./ScholarWriting
 ```
 
-Codex 会读取仓库根目录的 `SKILL.md`，然后执行 `scripts/install-codex.sh`。安装完成后重启 Codex。
+Codex 应按 README 中的安装说明执行 `scripts/install-codex.sh`。安装完成后重启 Codex。
 
 如果检测到旧版 `scholar-writing` 安装，流程应停止并询问用户是否覆盖。用户确认后再执行：
 
@@ -51,7 +51,7 @@ ${CODEX_HOME:-$HOME/.codex}/agents/scholar-*.toml
 帮我卸载本机这个仓库：./ScholarWriting
 ```
 
-Codex 会按仓库根目录 `SKILL.md` 中的卸载流程执行。卸载不会删除用户自己的写作项目。
+Codex 应按 README 中的卸载说明执行。卸载不会删除用户自己的写作项目。
 
 终端手动卸载命令：
 
