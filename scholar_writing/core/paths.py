@@ -7,7 +7,7 @@ def find_repo_root(start=None):
     runtime_root = os.environ.get("SCHOLAR_WRITING_RUNTIME")
     if runtime_root:
         candidate = Path(runtime_root).resolve()
-        if (candidate / "README.md").exists() and (candidate / "scholar-writing").is_dir():
+        if (candidate / "README.md").exists() and (candidate / "scholar_writing" / "resources").is_dir():
             return candidate
         raise FileNotFoundError(f"SCHOLAR_WRITING_RUNTIME is not a ScholarWriting runtime: {candidate}")
 
@@ -16,16 +16,16 @@ def find_repo_root(start=None):
         current = current.parent
 
     for candidate in [current, *current.parents]:
-        if (candidate / "README.md").exists() and (candidate / "scholar-writing").is_dir():
+        if (candidate / "README.md").exists() and (candidate / "scholar_writing" / "resources").is_dir():
             return candidate
 
     raise FileNotFoundError(f"Cannot find ScholarWriting repo root from {current}")
 
 
 def framework_root(repo_root=None):
-    """Return the legacy framework resource directory."""
+    """Return the framework resource directory."""
     root = Path(repo_root) if repo_root else find_repo_root()
-    return root / "scholar-writing"
+    return root / "scholar_writing" / "resources"
 
 
 def schema_path(data_type, repo_root=None):

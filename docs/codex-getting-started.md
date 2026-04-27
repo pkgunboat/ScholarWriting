@@ -98,7 +98,7 @@ Codex 会调用已安装的 `scholar-writing` skill。controller 和 references 
 ${CODEX_HOME:-$HOME/.codex}/skills/scholar-writing/bin/scholar-writing taskpack my-proposal --format json
 ```
 
-输出中的 `reference_inputs` 是本轮 agent 应读取的质量规则。它们来自 `scholar-writing/references/`，包括中文学术风格、国自然结构、去 AI 痕迹规则和章节句式模板。
+输出中的 `reference_inputs` 是本轮 agent 应读取的质量规则。它们来自 `scholar_writing/resources/references/`，包括中文学术风格、国自然结构、去 AI 痕迹规则和章节句式模板。
 
 用户通常不需要手动打开这些文件。Codex skill 会先生成 taskpack，再把 `reference_inputs` 作为写作、审阅或修订规则传给 custom agent。
 

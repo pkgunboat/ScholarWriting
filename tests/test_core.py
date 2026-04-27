@@ -15,7 +15,7 @@ def test_core_paths_resolve_repo_resources():
     repo_root = find_repo_root(Path(__file__))
 
     assert (repo_root / "README.md").exists()
-    assert framework_root(repo_root) == repo_root / "scholar-writing"
+    assert framework_root(repo_root) == repo_root / "scholar_writing" / "resources"
     assert schema_path("config", repo_root).name == "config.schema.yaml"
 
 

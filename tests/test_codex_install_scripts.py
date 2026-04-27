@@ -31,9 +31,16 @@ def test_codex_install_and_uninstall_roundtrip(tmp_path):
     assert (skill_dir / "bin" / "scholar-writing").exists()
     assert os.access(skill_dir / "bin" / "scholar-writing", os.X_OK)
     assert (runtime_dir / "pyproject.toml").exists()
-    assert (runtime_dir / "scholar-writing" / "references" / "STYLE_GUIDE_ZH.md").exists()
+    assert (runtime_dir / "scholar_writing" / "resources" / "references" / "STYLE_GUIDE_ZH.md").exists()
+    assert (runtime_dir / "scholar_writing" / "cli.py").exists()
+    assert (runtime_dir / "scholar_writing" / "prompts" / "writer.md").exists()
     assert not (runtime_dir / ".git").exists()
     assert not (runtime_dir / ".venv").exists()
+    assert not (runtime_dir / ".codex").exists()
+    assert not (runtime_dir / ".agents").exists()
+    assert not (runtime_dir / "SKILL.md").exists()
+    assert not (runtime_dir / "adapters" / "claude-code" / "skills").exists()
+    assert sorted(path.relative_to(skill_dir).as_posix() for path in skill_dir.rglob("SKILL.md")) == ["SKILL.md"]
     assert (codex_home / "agents" / "scholar-writer.toml").exists()
     assert "学术写作助手" in (skill_dir / "SKILL.md").read_text(encoding="utf-8")
 
@@ -123,4 +130,5 @@ def test_install_can_finalize_generic_skill_install_location(tmp_path):
     assert (generic_skill_dir / "SKILL.md").exists()
     assert (generic_skill_dir / "runtime" / "pyproject.toml").exists()
     assert (generic_skill_dir / "bin" / "scholar-writing").exists()
+    assert not (generic_skill_dir / "runtime" / "adapters" / "claude-code" / "skills").exists()
     assert not (generic_skill_dir / "scripts" / "install-codex.sh").exists()

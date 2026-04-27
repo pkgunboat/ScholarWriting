@@ -10,7 +10,7 @@
 
 - 仓库声明为多智能体学术写作框架，但 Codex 中不会自然触发多智能体。
 - Codex 无法自动执行“写作 -> 审查 -> 修订 -> 再审查”的闭环。
-- 现有 `scholar-writing/skills/pipeline/SKILL.md` 是 Claude Code 风格编排说明，依赖 `Agent`/`Bash` 等 Claude Code 语义。
+- 现有 `adapters/claude-code/skills/pipeline/SKILL.md` 是 Claude Code 风格编排说明，依赖 `Agent`/`Bash` 等 Claude Code 语义。
 - 仓库缺少 Codex 可发现的分发入口，例如 `.agents/skills/` 或 `.codex-plugin/plugin.json`。
 - 状态文件、Schema、示例、writer 输出路径、测试路径存在多处契约漂移。
 
@@ -134,7 +134,7 @@
 
 **当前判断：** 长期方向应是“平台无关核心 + 平台 adapter”。共享核心包含 prompts、templates、schemas、scripts、loop controller 和 examples；Codex 与 Claude Code 分别作为 adapter。Claude Code 原生入口不删除，但逐步降级为 adapter，避免继续把核心逻辑写死在 Claude Code 的 `Agent` 工具语义里。
 
-**影响范围：** 目录结构应逐步拆出 `prompts/`、`adapters/codex/`、`adapters/claude-code/` 或等价分层；`scholar-writing/skills/pipeline/SKILL.md` 保留但标记为 Claude adapter；Codex 入口不直接复制 Claude pipeline，而是调用共享 controller 和 prompt 包。
+**影响范围：** 目录结构应逐步拆出 `prompts/`、`adapters/codex/`、`adapters/claude-code/` 或等价分层；`adapters/claude-code/skills/pipeline/SKILL.md` 保留但标记为 Claude adapter；Codex 入口不直接复制 Claude pipeline，而是调用共享 controller 和 prompt 包。
 
 **状态：** 已确认。
 

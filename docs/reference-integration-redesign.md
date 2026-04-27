@@ -12,7 +12,7 @@
 
 ## 目标
 
-把 `scholar-writing/references/` 从“旧 skill 中零散引用的资料目录”升级为 Codex 与 Claude Code 都能使用的正式质量规则层。
+把 `scholar_writing/resources/references/` 从“旧 skill 中零散引用的资料目录”升级为 Codex 与 Claude Code 都能使用的正式质量规则层。
 
 改造完成后，用户仍然只需要在 Codex 或 Claude Code 中用自然语言触发 `scholar-writing`。agent 在后台自动选择和加载必要 references，用这些资料约束规划、写作、审阅和修订。
 
@@ -42,7 +42,7 @@
 
 ## 设计原则
 
-1. **references 是规则输入。** 用户素材放在项目目录的 `materials/`；框架规则放在仓库的 `scholar-writing/references/`。
+1. **references 是规则输入。** 用户素材放在项目目录的 `materials/`；框架规则放在仓库的 `scholar_writing/resources/references/`。
 2. **按任务选择资料。** 不把整个 `references/` 一次塞给 agent，避免上下文浪费和规则互相干扰。
 3. **taskpack 明确声明引用。** agent 读取哪些 references 必须可见、可测试、可复现。
 4. **Python controller 做选择，agent 做执行。** 资料选择逻辑进入确定性代码，避免每次由 LLM 临场判断。
@@ -66,15 +66,15 @@ Codex 后台应执行：
 ```yaml
 reference_inputs:
   style:
-    - scholar-writing/references/STYLE_GUIDE_ZH.md
+    - scholar_writing/resources/references/STYLE_GUIDE_ZH.md
   de_ai:
-    - scholar-writing/references/DEAI_PATTERNS_ZH.md
+    - scholar_writing/resources/references/DEAI_PATTERNS_ZH.md
   nsfc:
-    - scholar-writing/references/NSFC_GUIDE.md
-    - scholar-writing/references/NSFC_STRUCTURE_ZH.md
+    - scholar_writing/resources/references/NSFC_GUIDE.md
+    - scholar_writing/resources/references/NSFC_STRUCTURE_ZH.md
   section_patterns:
-    - scholar-writing/references/patterns/00_通用.md
-    - scholar-writing/references/patterns/02_立项依据.md
+    - scholar_writing/resources/references/patterns/00_通用.md
+    - scholar_writing/resources/references/patterns/02_立项依据.md
 ```
 
 4. reviewer 根据这些 references 输出结构化审阅结果。
@@ -93,8 +93,8 @@ reference_inputs:
 
 ```text
 scholar_writing/core/references.py
-scholar-writing/schemas/reference_registry.schema.yaml
-scholar-writing/config/reference_registry.yaml
+scholar_writing/resources/schemas/reference_registry.schema.yaml
+scholar_writing/resources/config/reference_registry.yaml
 ```
 
 `reference_registry.yaml` 负责声明规则资产：
@@ -103,7 +103,7 @@ scholar-writing/config/reference_registry.yaml
 version: 1
 references:
   style_zh:
-    path: scholar-writing/references/STYLE_GUIDE_ZH.md
+    path: scholar_writing/resources/references/STYLE_GUIDE_ZH.md
     applies_to:
       project_types: [nsfc, paper]
       agent_roles: [writer, reviewer, revision]
@@ -111,7 +111,7 @@ references:
     purpose: 中文学术写作风格规则
 
   deai_zh:
-    path: scholar-writing/references/DEAI_PATTERNS_ZH.md
+    path: scholar_writing/resources/references/DEAI_PATTERNS_ZH.md
     applies_to:
       project_types: [nsfc, paper]
       agent_roles: [reviewer, revision]
@@ -120,7 +120,7 @@ references:
     purpose: AI 写作痕迹检测与改写规则
 
   nsfc_structure:
-    path: scholar-writing/references/NSFC_STRUCTURE_ZH.md
+    path: scholar_writing/resources/references/NSFC_STRUCTURE_ZH.md
     applies_to:
       project_types: [nsfc]
       agent_roles: [architect, writer, reviewer, revision]
@@ -128,7 +128,7 @@ references:
     purpose: 国自然章节结构规则
 
   nsfc_guide:
-    path: scholar-writing/references/NSFC_GUIDE.md
+    path: scholar_writing/resources/references/NSFC_GUIDE.md
     applies_to:
       project_types: [nsfc]
       agent_roles: [architect, reviewer]
@@ -136,7 +136,7 @@ references:
     purpose: 国自然评审要求和扣分项
 
   sentence_patterns_zh:
-    path: scholar-writing/references/SENTENCE_PATTERNS_ZH.md
+    path: scholar_writing/resources/references/SENTENCE_PATTERNS_ZH.md
     applies_to:
       project_types: [nsfc, paper]
       agent_roles: [writer, revision]
@@ -149,13 +149,13 @@ references:
 ```yaml
 section_patterns:
   nsfc:
-    "01_摘要": scholar-writing/references/patterns/01_摘要.md
-    "02_立项依据": scholar-writing/references/patterns/02_立项依据.md
-    "03_研究内容": scholar-writing/references/patterns/03_研究内容.md
-    "04_研究方案": scholar-writing/references/patterns/04_研究方案.md
-    "05_可行性分析": scholar-writing/references/patterns/05_可行性分析.md
-    "06_创新点": scholar-writing/references/patterns/06_创新点.md
-    "07_研究基础": scholar-writing/references/patterns/07_研究基础.md
+    "01_摘要": scholar_writing/resources/references/patterns/01_摘要.md
+    "02_立项依据": scholar_writing/resources/references/patterns/02_立项依据.md
+    "03_研究内容": scholar_writing/resources/references/patterns/03_研究内容.md
+    "04_研究方案": scholar_writing/resources/references/patterns/04_研究方案.md
+    "05_可行性分析": scholar_writing/resources/references/patterns/05_可行性分析.md
+    "06_创新点": scholar_writing/resources/references/patterns/06_创新点.md
+    "07_研究基础": scholar_writing/resources/references/patterns/07_研究基础.md
 ```
 
 ### 2. Reference Selector
@@ -200,18 +200,18 @@ def select_references(
 reference_inputs:
   required:
     - id: style_zh
-      path: scholar-writing/references/STYLE_GUIDE_ZH.md
+      path: scholar_writing/resources/references/STYLE_GUIDE_ZH.md
       reason: 写作风格与标点规则
     - id: nsfc_structure
-      path: scholar-writing/references/NSFC_STRUCTURE_ZH.md
+      path: scholar_writing/resources/references/NSFC_STRUCTURE_ZH.md
       reason: 国自然章节结构约束
   section_specific:
     - id: pattern_02_lixiangyiju
-      path: scholar-writing/references/patterns/02_立项依据.md
+      path: scholar_writing/resources/references/patterns/02_立项依据.md
       reason: 立项依据句式模板
   optional:
     - id: sentence_patterns_zh
-      path: scholar-writing/references/SENTENCE_PATTERNS_ZH.md
+      path: scholar_writing/resources/references/SENTENCE_PATTERNS_ZH.md
       reason: 句式替换和修订参考
 ```
 
@@ -317,7 +317,7 @@ reference_input:
 ```markdown
 调用 agent 前，先检查 taskpack 中的 `reference_inputs`。
 把这些引用文件作为质量规则传递，不要当作用户提供的事实证据。
-除非用户明确要求完整规则审计，不要遍历读取 `scholar-writing/references/` 下的全部文件。
+除非用户明确要求完整规则审计，不要遍历读取 `scholar_writing/resources/references/` 下的全部文件。
 ```
 
 ### 6. Codex Agent 配置更新
@@ -413,8 +413,8 @@ tests/test_review_result_references.py
 
 **修改文件：**
 
-- 新增 `scholar-writing/config/reference_registry.yaml`
-- 新增 `scholar-writing/schemas/reference_registry.schema.yaml`
+- 新增 `scholar_writing/resources/config/reference_registry.yaml`
+- 新增 `scholar_writing/resources/schemas/reference_registry.schema.yaml`
 - 新增 `scholar_writing/core/references.py`
 - 新增 `tests/test_references.py`
 
@@ -431,7 +431,7 @@ tests/test_review_result_references.py
 **修改文件：**
 
 - 修改 `scholar_writing/core/taskpack.py`
-- 修改 `scholar-writing/schemas/taskpack.schema.yaml`
+- 修改 `scholar_writing/resources/schemas/taskpack.schema.yaml`
 - 修改 `tests/test_core.py`
 - 新增或修改 `tests/test_taskpack_references.py`
 
@@ -471,8 +471,8 @@ tests/test_review_result_references.py
 
 **修改文件：**
 
-- 修改 `scholar-writing/schemas/review_result.schema.yaml`
-- 修改 `scholar-writing/schemas/revision_log.schema.yaml`
+- 修改 `scholar_writing/resources/schemas/review_result.schema.yaml`
+- 修改 `scholar_writing/resources/schemas/revision_log.schema.yaml`
 - 修改 `scholar_writing/core/workflow.py`
 - 修改 `tests/test_core.py`
 - 新增 `tests/test_review_result_references.py`
@@ -493,7 +493,7 @@ tests/test_review_result_references.py
 - 修改 `README.md`
 - 修改 `docs/codex-getting-started.md`
 - 修改 `docs/codex-architecture.md`
-- 修改 `scholar-writing/schemas/README.md`
+- 修改 `scholar_writing/resources/schemas/README.md`
 
 **验收条件：**
 

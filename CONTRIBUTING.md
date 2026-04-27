@@ -37,7 +37,7 @@ chore: 构建流程或辅助工具变更
 
 ### 添加新的项目模板
 
-1. 在 `scholar-writing/templates/` 下创建新目录
+1. 在 `scholar_writing/resources/templates/` 下创建新目录
 2. 创建 `base.yaml`，定义章节结构和依赖图
 3. 创建 `checklists/` 下的评审检查清单
 4. 可通过 `extends` 字段继承已有模板
@@ -65,7 +65,7 @@ dependency_graph:
 
 ### 添加新的 Writer Agent
 
-1. 在 `scholar-writing/skills/writer/` 下创建目录
+1. 在 `adapters/claude-code/skills/writer/` 下创建目录
 2. 编写 `SKILL.md`，包含 YAML frontmatter 和写作指令
 3. 创建 `config.yaml` 配置文件
 
@@ -81,7 +81,7 @@ allowed-tools: [Read, Write, Edit, Bash]
 
 ### 添加新的 Reviewer Agent
 
-1. 在 `scholar-writing/skills/reviewer/` 下创建目录（如 `R9_your_dimension/`）
+1. 在 `adapters/claude-code/skills/reviewer/` 下创建目录（如 `R9_your_dimension/`）
 2. 编写 `SKILL.md`，定义审阅维度和评分标准
 3. 在对应模板的 `review_strategy` 中注册新 Reviewer
 4. 更新 `config/default_config.yaml` 中的评分权重
@@ -106,7 +106,7 @@ python -m pytest test_scripts.py -v
 修改数据结构后，确保通过 Schema 校验：
 
 ```bash
-python scholar-writing/scripts/validate.py all <project_dir>
+python scholar_writing/resources/scripts/validate.py all <project_dir>
 ```
 
 ## 代码风格

@@ -16,7 +16,7 @@
 | taskpack.schema.yaml | `scholar-writing taskpack` 输出 | JSON Schema |
 | review_result.schema.yaml | `advance --event-file` 的 review_result 事件 | JSON Schema |
 | revision_log.schema.yaml | revisions/*.yaml 修订日志 | JSON Schema |
-| reference_registry.schema.yaml | `scholar-writing/config/reference_registry.yaml` | JSON Schema |
+| reference_registry.schema.yaml | `scholar_writing/resources/config/reference_registry.yaml` | JSON Schema |
 | markdown_rules.yaml | Markdown 正文 | 正则模式匹配 |
 
 ## 状态机要点
@@ -40,7 +40,7 @@ uv run scholar-writing advance <project_dir> --event-file <review-result.yaml> -
 
 ## References 与 Taskpack
 
-`reference_registry.schema.yaml` 校验框架内置写作规则的索引。Registry 中的路径必须使用相对路径，并指向 `scholar-writing/references/` 下的实际文件。
+`reference_registry.schema.yaml` 校验框架内置写作规则的索引。Registry 中的路径必须使用相对路径，并指向 `scholar_writing/resources/references/` 下的实际文件。
 
 `taskpack.schema.yaml` 支持 `reference_inputs`：
 
@@ -54,17 +54,17 @@ uv run scholar-writing advance <project_dir> --event-file <review-result.yaml> -
 
 ```bash
 # 校验单个文件
-uv run python scholar-writing/scripts/validate.py config config.yaml
-uv run python scholar-writing/scripts/validate.py review_report reviews/round_1/02_立项依据_R1.md
+uv run python scholar_writing/resources/scripts/validate.py config config.yaml
+uv run python scholar_writing/resources/scripts/validate.py review_report reviews/round_1/02_立项依据_R1.md
 
 # 批量校验项目
-uv run python scholar-writing/scripts/validate.py all .
+uv run python scholar_writing/resources/scripts/validate.py all .
 
 # JSON 输出（供 Pipeline 程序化调用）
-uv run python scholar-writing/scripts/validate.py config config.yaml --format json
+uv run python scholar_writing/resources/scripts/validate.py config config.yaml --format json
 
 # 严格模式（warning 也视为错误）
-uv run python scholar-writing/scripts/validate.py all . --strict
+uv run python scholar_writing/resources/scripts/validate.py all . --strict
 ```
 
 ## 扩展

@@ -29,8 +29,8 @@ def test_from_materials_taskpack_contains_architect_references():
     paths = flatten_paths(taskpack)
 
     assert taskpack["action"] == "run_architect"
-    assert "scholar-writing/references/NSFC_GUIDE.md" in paths
-    assert "scholar-writing/references/NSFC_STRUCTURE_ZH.md" in paths
+    assert "scholar_writing/resources/references/NSFC_GUIDE.md" in paths
+    assert "scholar_writing/resources/references/NSFC_STRUCTURE_ZH.md" in paths
 
 
 def test_from_outline_taskpack_contains_writer_references():
@@ -38,9 +38,9 @@ def test_from_outline_taskpack_contains_writer_references():
     paths = flatten_paths(taskpack)
 
     assert taskpack["action"] == "run_writer"
-    assert "scholar-writing/references/STYLE_GUIDE_ZH.md" in paths
-    assert "scholar-writing/references/SENTENCE_PATTERNS_ZH.md" in paths
-    assert "scholar-writing/references/NSFC_STRUCTURE_ZH.md" in paths
+    assert "scholar_writing/resources/references/STYLE_GUIDE_ZH.md" in paths
+    assert "scholar_writing/resources/references/SENTENCE_PATTERNS_ZH.md" in paths
+    assert "scholar_writing/resources/references/NSFC_STRUCTURE_ZH.md" in paths
 
 
 def test_from_draft_taskpack_contains_reviewer_references():
@@ -48,9 +48,9 @@ def test_from_draft_taskpack_contains_reviewer_references():
     paths = flatten_paths(taskpack)
 
     assert taskpack["action"] == "run_reviewers"
-    assert "scholar-writing/references/STYLE_GUIDE_ZH.md" in paths
-    assert "scholar-writing/references/DEAI_PATTERNS_ZH.md" in paths
-    assert "scholar-writing/references/NSFC_STRUCTURE_ZH.md" in paths
+    assert "scholar_writing/resources/references/STYLE_GUIDE_ZH.md" in paths
+    assert "scholar_writing/resources/references/DEAI_PATTERNS_ZH.md" in paths
+    assert "scholar_writing/resources/references/NSFC_STRUCTURE_ZH.md" in paths
 
 
 def test_taskpack_reference_inputs_validate_against_schema():

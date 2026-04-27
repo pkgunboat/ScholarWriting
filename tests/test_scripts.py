@@ -5,7 +5,7 @@ import subprocess, json, tempfile, os, shutil, sys
 
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
-SCRIPTS_DIR = PROJECT_ROOT / 'scholar-writing' / 'scripts'
+SCRIPTS_DIR = PROJECT_ROOT / 'scholar_writing' / 'resources' / 'scripts'
 
 def run_script(script, *args):
     """运行脚本并返回解析后的 JSON 输出。"""

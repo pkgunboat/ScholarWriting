@@ -13,10 +13,10 @@
 ```bash
 git clone https://github.com/pkgunboat/ScholarWriting.git
 cd ScholarWriting
-pip install -r scholar-writing/scripts/requirements.txt
+pip install -r scholar_writing/resources/scripts/requirements.txt
 ```
 
-将 `scholar-writing/skills/` 注册为 Claude Code 的 Skill 搜索路径。
+将 `adapters/claude-code/skills/` 注册为 Claude Code 的 Skill 搜索路径。
 
 ## 创建第一个项目
 

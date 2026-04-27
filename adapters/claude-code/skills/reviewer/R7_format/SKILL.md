@@ -24,12 +24,12 @@ allowed-tools: [Read, Write]
 在自由分析之前，先运行以下脚本获取基础数据：
 
 **格式检查**：
-- `python3 scholar-writing/scripts/count_words.py sections/` → 各章节字数和篇幅比例
-- `python3 scholar-writing/scripts/check_format.py sections/` → 标题层级问题
+- `python3 scholar_writing/resources/scripts/count_words.py sections/` → 各章节字数和篇幅比例
+- `python3 scholar_writing/resources/scripts/check_format.py sections/` → 标题层级问题
 
 **引文检查**：
-- `python3 scholar-writing/scripts/check_references.py sections/` → 引文格式和年份分布
-- `python3 scholar-writing/scripts/check_cross_refs.py sections/` → 交叉引用完整性
+- `python3 scholar_writing/resources/scripts/check_references.py sections/` → 引文格式和年份分布
+- `python3 scholar_writing/resources/scripts/check_cross_refs.py sections/` → 交叉引用完整性
 
 你将收到脚本的检查结果（JSON 格式）。
 

@@ -6,7 +6,7 @@ import sys
 import yaml
 
 from .core.config import load_project_config
-from .core.paths import find_repo_root
+from .core.paths import find_repo_root, framework_root
 from .core.project import init_project
 from .core.state import create_initial_state, read_state, state_path
 from .core.taskpack import build_taskpack
@@ -52,7 +52,7 @@ def command_init(args):
 
 def command_validate(args):
     repo_root = find_repo_root(Path(__file__))
-    scripts_dir = repo_root / "scholar-writing" / "scripts"
+    scripts_dir = framework_root(repo_root) / "scripts"
     sys.path.insert(0, str(scripts_dir))
     import validate as legacy_validate
 

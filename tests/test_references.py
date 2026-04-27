@@ -37,8 +37,8 @@ def test_select_references_for_nsfc_architect():
     )
     paths = paths_for(selected)
 
-    assert "scholar-writing/references/NSFC_GUIDE.md" in paths
-    assert "scholar-writing/references/NSFC_STRUCTURE_ZH.md" in paths
+    assert "scholar_writing/resources/references/NSFC_GUIDE.md" in paths
+    assert "scholar_writing/resources/references/NSFC_STRUCTURE_ZH.md" in paths
     assert all(not Path(path).is_absolute() for path in paths)
 
 
@@ -51,11 +51,11 @@ def test_select_references_for_nsfc_writer_section():
     )
     paths = paths_for(selected)
 
-    assert "scholar-writing/references/STYLE_GUIDE_ZH.md" in paths
-    assert "scholar-writing/references/SENTENCE_PATTERNS_ZH.md" in paths
-    assert "scholar-writing/references/patterns/00_通用.md" in paths
-    assert "scholar-writing/references/patterns/02_立项依据.md" in paths
-    assert "scholar-writing/references/NSFC_STRUCTURE_ZH.md" in paths
+    assert "scholar_writing/resources/references/STYLE_GUIDE_ZH.md" in paths
+    assert "scholar_writing/resources/references/SENTENCE_PATTERNS_ZH.md" in paths
+    assert "scholar_writing/resources/references/patterns/00_通用.md" in paths
+    assert "scholar_writing/resources/references/patterns/02_立项依据.md" in paths
+    assert "scholar_writing/resources/references/NSFC_STRUCTURE_ZH.md" in paths
 
 
 def test_select_references_for_deai_review():
@@ -67,8 +67,8 @@ def test_select_references_for_deai_review():
     )
     paths = paths_for(selected)
 
-    assert "scholar-writing/references/DEAI_PATTERNS_ZH.md" in paths
-    assert "scholar-writing/references/STYLE_GUIDE_ZH.md" in paths
+    assert "scholar_writing/resources/references/DEAI_PATTERNS_ZH.md" in paths
+    assert "scholar_writing/resources/references/STYLE_GUIDE_ZH.md" in paths
 
 
 def test_missing_reference_file_raises_clear_error(tmp_path):
@@ -76,7 +76,7 @@ def test_missing_reference_file_raises_clear_error(tmp_path):
         "version": 1,
         "references": {
             "missing": {
-                "path": "scholar-writing/references/MISSING.md",
+                "path": "scholar_writing/resources/references/MISSING.md",
                 "purpose": "missing test",
                 "applies_to": {
                     "project_types": ["nsfc"],

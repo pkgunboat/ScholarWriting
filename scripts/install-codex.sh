@@ -57,24 +57,41 @@ if [ -e "$install_dir" ] && [ "$replace_existing" -ne 1 ] && [ "$(cd "$install_d
 fi
 
 mkdir -p "$stage_source"
-if command -v rsync >/dev/null 2>&1; then
-  rsync -a \
-    --exclude '.git' \
-    --exclude '.venv' \
-    --exclude '__pycache__' \
-    --exclude '.pytest_cache' \
-    --exclude '.playwright-cli' \
-    --exclude '.DS_Store' \
-    "$repo_root/" "$stage_source/"
-else
-  tar -C "$repo_root" \
-    --exclude './.git' \
-    --exclude './.venv' \
-    --exclude './__pycache__' \
-    --exclude './.pytest_cache' \
-    --exclude './.playwright-cli' \
-    -cf - . | tar -C "$stage_source" -xf -
+
+copy_tree() {
+  local source_path="$1"
+  local target_path="$2"
+  mkdir -p "$(dirname "$target_path")"
+  if command -v rsync >/dev/null 2>&1; then
+    rsync -a \
+      --exclude '__pycache__' \
+      --exclude '.pytest_cache' \
+      --exclude '.DS_Store' \
+      "$source_path/" "$target_path/"
+  else
+    cp -R "$source_path" "$target_path"
+    find "$target_path" -name '__pycache__' -type d -prune -exec rm -rf {} +
+    find "$target_path" -name '.pytest_cache' -type d -prune -exec rm -rf {} +
+    find "$target_path" -name '.DS_Store' -type f -delete
+  fi
+}
+
+copy_file() {
+  local source_path="$1"
+  local target_path="$2"
+  mkdir -p "$(dirname "$target_path")"
+  cp "$source_path" "$target_path"
+}
+
+# Build a minimal Codex runtime. Do not copy the whole repository: the source
+# tree contains legacy Claude Code skills that must not be discoverable by Codex.
+copy_file "$repo_root/pyproject.toml" "$stage_source/pyproject.toml"
+copy_file "$repo_root/README.md" "$stage_source/README.md"
+if [ -f "$repo_root/uv.lock" ]; then
+  copy_file "$repo_root/uv.lock" "$stage_source/uv.lock"
 fi
+copy_tree "$repo_root/scholar_writing" "$stage_source/scholar_writing"
+copy_tree "$repo_root/.codex/agents" "$stage_source/.codex/agents"
 
 rm -rf "$install_dir"
 mkdir -p "$install_dir" "$agents_dir" "$install_dir/bin"
@@ -82,20 +99,16 @@ mkdir -p "$runtime_dir"
 
 if command -v rsync >/dev/null 2>&1; then
   rsync -a \
-    --exclude '.git' \
-    --exclude '.venv' \
+    --exclude '.codex' \
     --exclude '__pycache__' \
     --exclude '.pytest_cache' \
-    --exclude '.playwright-cli' \
     --exclude '.DS_Store' \
     "$stage_source/" "$runtime_dir/"
 else
   tar -C "$stage_source" \
-    --exclude './.git' \
-    --exclude './.venv' \
+    --exclude './.codex' \
     --exclude './__pycache__' \
     --exclude './.pytest_cache' \
-    --exclude './.playwright-cli' \
     -cf - . | tar -C "$runtime_dir" -xf -
 fi
 
@@ -150,7 +163,7 @@ ${CODEX_HOME:-$HOME/.codex}/skills/scholar-writing/bin/scholar-writing next my-p
 ${CODEX_HOME:-$HOME/.codex}/skills/scholar-writing/bin/scholar-writing taskpack my-proposal --format json
 ```
 
-按返回的 action 和 taskpack 推进。`taskpack.reference_inputs` 是安装版 runtime 中 `scholar-writing/references/` 提供的质量规则。
+按返回的 action 和 taskpack 推进。`taskpack.reference_inputs` 是安装版 runtime 中 `scholar_writing/resources/references/` 提供的质量规则。
 
 ## Agent 使用
 

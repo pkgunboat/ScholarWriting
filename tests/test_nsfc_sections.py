@@ -18,7 +18,7 @@ EXPECTED_SECTION_FILES = {
 
 def test_nsfc_writer_outputs_match_base_template_section_files():
     for section_name, expected_path in EXPECTED_SECTION_FILES.items():
-        config_path = REPO_ROOT / "scholar-writing" / "skills" / "writer" / "nsfc" / section_name / "config.yaml"
+        config_path = REPO_ROOT / "adapters" / "claude-code" / "skills" / "writer" / "nsfc" / section_name / "config.yaml"
         data = yaml.safe_load(config_path.read_text(encoding="utf-8"))
         section_outputs = [
             item["path"]
@@ -30,7 +30,7 @@ def test_nsfc_writer_outputs_match_base_template_section_files():
 
 
 def test_nsfc_base_template_declares_canonical_section_files():
-    data = yaml.safe_load((REPO_ROOT / "scholar-writing" / "templates" / "nsfc" / "base.yaml").read_text(encoding="utf-8"))
+    data = yaml.safe_load((REPO_ROOT / "scholar_writing" / "resources" / "templates" / "nsfc" / "base.yaml").read_text(encoding="utf-8"))
     template_files = {section["name"]: section["file"] for section in data["sections"]}
 
     assert template_files == {

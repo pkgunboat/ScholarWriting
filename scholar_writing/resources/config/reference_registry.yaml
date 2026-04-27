@@ -1,7 +1,7 @@
 version: 1
 references:
   style_zh:
-    path: scholar-writing/references/STYLE_GUIDE_ZH.md
+    path: scholar_writing/resources/references/STYLE_GUIDE_ZH.md
     purpose: 中文学术写作风格、句式、段落、标点和衔接规则
     category: style
     applies_to:
@@ -11,7 +11,7 @@ references:
       actions: [run_writer, run_reviewers, run_revision]
 
   deai_zh:
-    path: scholar-writing/references/DEAI_PATTERNS_ZH.md
+    path: scholar_writing/resources/references/DEAI_PATTERNS_ZH.md
     purpose: 中文 AI 写作痕迹检测与改写规则
     category: de_ai
     applies_to:
@@ -22,7 +22,7 @@ references:
       review_dimensions: [de_ai]
 
   nsfc_guide:
-    path: scholar-writing/references/NSFC_GUIDE.md
+    path: scholar_writing/resources/references/NSFC_GUIDE.md
     purpose: 国自然申报书写作要求、评审侧重点和常见扣分项
     category: nsfc
     applies_to:
@@ -33,7 +33,7 @@ references:
       review_dimensions: [completeness, format, narrative, feasibility]
 
   nsfc_structure:
-    path: scholar-writing/references/NSFC_STRUCTURE_ZH.md
+    path: scholar_writing/resources/references/NSFC_STRUCTURE_ZH.md
     purpose: 国自然章节结构、章节使命和评审关注点
     category: structure
     applies_to:
@@ -43,7 +43,7 @@ references:
       actions: [run_architect, run_writer, run_reviewers, run_revision]
 
   sentence_patterns_zh:
-    path: scholar-writing/references/SENTENCE_PATTERNS_ZH.md
+    path: scholar_writing/resources/references/SENTENCE_PATTERNS_ZH.md
     purpose: 中文学术写作通用句式库
     category: patterns
     applies_to:
@@ -53,7 +53,7 @@ references:
       actions: [run_writer, run_revision]
 
   pattern_common_zh:
-    path: scholar-writing/references/patterns/00_通用.md
+    path: scholar_writing/resources/references/patterns/00_通用.md
     purpose: 通用过渡、递进、论证和衔接句式
     category: patterns
     applies_to:
@@ -64,10 +64,10 @@ references:
 
 section_patterns:
   nsfc:
-    "01_摘要": scholar-writing/references/patterns/01_摘要.md
-    "02_立项依据": scholar-writing/references/patterns/02_立项依据.md
-    "03_研究内容": scholar-writing/references/patterns/03_研究内容.md
-    "04_研究方案": scholar-writing/references/patterns/04_研究方案.md
-    "05_可行性分析": scholar-writing/references/patterns/05_可行性分析.md
-    "06_创新点": scholar-writing/references/patterns/06_创新点.md
-    "07_研究基础": scholar-writing/references/patterns/07_研究基础.md
+    "01_摘要": scholar_writing/resources/references/patterns/01_摘要.md
+    "02_立项依据": scholar_writing/resources/references/patterns/02_立项依据.md
+    "03_研究内容": scholar_writing/resources/references/patterns/03_研究内容.md
+    "04_研究方案": scholar_writing/resources/references/patterns/04_研究方案.md
+    "05_可行性分析": scholar_writing/resources/references/patterns/05_可行性分析.md
+    "06_创新点": scholar_writing/resources/references/patterns/06_创新点.md
+    "07_研究基础": scholar_writing/resources/references/patterns/07_研究基础.md

@@ -24,7 +24,7 @@ import tempfile
 
 # 项目根目录和脚本路径
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
-VALIDATE_SCRIPT = PROJECT_ROOT / 'scholar-writing' / 'scripts' / 'validate.py'
+VALIDATE_SCRIPT = PROJECT_ROOT / 'scholar_writing' / 'resources' / 'scripts' / 'validate.py'
 
 
 def run_validate(data_type, file_path, extra_args=None):

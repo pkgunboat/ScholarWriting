@@ -10,11 +10,11 @@ ScholarWriting 采用模块化设计，支持扩展新的项目类型、Writer A
 
 ```bash
 # 可以继承已有的 base 模板
-touch scholar-writing/templates/nsfc/青年基金.yaml
+touch scholar_writing/resources/templates/nsfc/青年基金.yaml
 ```
 
 ```yaml
-# scholar-writing/templates/nsfc/青年基金.yaml
+# scholar_writing/resources/templates/nsfc/青年基金.yaml
 type: nsfc
 extends: nsfc/base            # 继承基础 NSFC 模板
 
@@ -69,8 +69,8 @@ project:
 ### 1. 创建模板目录
 
 ```bash
-mkdir -p scholar-writing/templates/paper
-mkdir -p scholar-writing/templates/paper/checklists
+mkdir -p scholar_writing/resources/templates/paper
+mkdir -p scholar_writing/resources/templates/paper/checklists
 ```
 
 ### 2. 定义基础模板
@@ -112,7 +112,7 @@ review_strategy:
 ### 3. 创建对应的 Writer Agent
 
 ```bash
-mkdir -p scholar-writing/skills/writer/paper/introduction
+mkdir -p adapters/claude-code/skills/writer/paper/introduction
 ```
 
 ```markdown
@@ -150,7 +150,7 @@ allowed-tools: [Read, Write, Edit, Bash]
 ### 1. 创建 Reviewer 目录
 
 ```bash
-mkdir -p scholar-writing/skills/reviewer/R9_novelty
+mkdir -p adapters/claude-code/skills/reviewer/R9_novelty
 ```
 
 ### 2. 编写 SKILL.md
